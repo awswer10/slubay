@@ -1,3 +1,3 @@
 module.exports = function(request, response) {
-	response.send('Bonjour.');
+	response.send('Top of the morning to you!');
 };
