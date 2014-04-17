@@ -11,9 +11,10 @@ app.use(express.static(__dirname+'/statics'));
 app.use(express.cookieParser());
 app.use(express.session({secret:'CS 340 3/6/2014'}));
 
-app.get('/', require('./routes/index'));
+app.get('/', require('./routes/home'));
 app.post('/login', require('./routes/login'));
 app.post('/register', require('./routes/register'));
+app.get('/home', require('./routes/home'));
 app.get('/logout', require('./routes/logout'));
 app.get('*', require('./routes/default'));
 

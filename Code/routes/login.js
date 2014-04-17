@@ -11,12 +11,13 @@ module.exports = function(request,response) {
         
         if (success) {
             request.session.username = name;
+            response.redirect('/home')
         }
         
         else {
             request.session.error = "Wrong username or password.";
+            response.redirect('/');
         }
         
-        response.redirect('/');
     });
 };
