@@ -15,6 +15,7 @@ app.get('/', require('./routes/home'));
 app.post('/login', require('./routes/login'));
 app.post('/register', require('./routes/register'));
 app.get('/home', require('./routes/home'));
+app.get('/manage', require('./routes/manage'));
 app.get('/logout', require('./routes/logout'));
 app.get('*', require('./routes/default'));
 
