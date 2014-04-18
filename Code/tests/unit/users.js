@@ -143,18 +143,11 @@ exports['edit password with wrong credential '] = function(test) {
 //count number of user
 exports['count number of user']= function(test){
     test.expect(1);
-    users.
-}
-//Retrieve all user
-exports['retrieve all user'] = function(test) {
-    test.expect(1);
-    users.retrieveAll(function(users){
-        exports(users)
-        test.ok();
-        test.done();
+    users.count(function(count){
+       test.ok(count=1);
+       test.done();
     });
-};
-
+}
 
 // Empty the database and close the connection
 exports['cleanup'] = function(test) {
