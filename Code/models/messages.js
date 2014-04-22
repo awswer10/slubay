@@ -60,25 +60,4 @@ module.exports.delete=function(_id,callback){
 
 //delete all messages in an user(receiver) inbox
 module.exports.deleteuser=function(receiver,callback){
-     db.messages.remove({receiver:receiver}, function(error) {
-        if (error) throw error;
-        callback(true);
-     });
-     
-}
-
-// Delete all messages
-module.exports.deleteAll = function(callback) {
-    db.messages.remove({}, function(error) {
-        if (error) throw error;
-        callback();
-    });
-};
-
-// Close the connection
-module.messages.close = function(callback) {
-    db.close(function(error) {
-        if (error) throw error;
-        callback();
-    });
-}
+     db.messages.remove({receiver:receiver}, func

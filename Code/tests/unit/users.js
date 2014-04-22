@@ -149,11 +149,11 @@ exports['count number of user']= function(test){
     });
 }
 
-//// Empty the database and close the connection
-//exports['cleanup'] = function(test) {
-//    users.deleteAll(function() {
-//        users.close(function() {
-//            test.done();
-//        });
-//    });
-//};
+// Empty the database and close the connection
+exports['cleanup'] = function(test) {
+    users.deleteAll(function() {
+        users.close(function() {
+            test.done();
+        });
+    });
+};
