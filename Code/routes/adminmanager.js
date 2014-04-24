@@ -1,7 +1,6 @@
 // Index page: home page, or login
 var users = require('../models/users');
 
-
 module.exports = function(request, response) {
     
    var username = request.session.username;
