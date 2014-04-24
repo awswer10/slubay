@@ -4,12 +4,13 @@ module.exports = function(request, response) {
    var username = request.session.username;
    
    if (username) {
-        response.render('home', {username:username});
-        
+        response.render('categorymanager', {username:username});
    }
    
    else {
+        
         response.render('login', {error:request.session.error});
         delete request.session.error;
+        response.redirect('/');
    }
 };

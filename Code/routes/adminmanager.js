@@ -2,14 +2,15 @@
 module.exports = function(request, response) {
     
    var username = request.session.username;
+   var admin = request.session.admin;
    
-   if (username) {
-        response.render('home', {username:username});
-        
+   if (admin) {
+        response.render('adminmanager', {username:username});
    }
    
    else {
         response.render('login', {error:request.session.error});
         delete request.session.error;
+        response.redirect('/');
    }
 };

@@ -1,0 +1,14 @@
+<% include chunks/head %>
+
+<p>Admin manager  page for <%= username %>.</p>
+
+<nav id = "adminmanagenavigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li ><a id="usermanager" href="/home/manage/admin/user">User Manager</a></li>
+        <li ><a id="categorymanager" href="/home/manage/admin/category">Category Manager</a></li>
+        <li ><a id="logout" href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<% include chunks/foot %>
