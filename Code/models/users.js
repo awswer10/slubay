@@ -88,15 +88,18 @@ module.exports.admin=function(name,callback){
         if (!user) {
             callback(false);
         }
-        
         else {
             if (admin) {
                 callback(true);
             }
             else
+            {
                 callback(false);
+            }
         }
-});
+    });
+}
+     
 //Edit email
 module.exports.editEmail = function(name, newemail, callback) {
      db.users.update({name:name}, {$set:{email:newemail}}, function(error) {
@@ -228,4 +231,4 @@ module.exports.close = function(callback) {
         if (error) throw error;
         callback();
     });
-}
+};
