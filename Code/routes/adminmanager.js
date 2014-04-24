@@ -6,7 +6,6 @@ module.exports = function(request, response) {
    var username = request.session.username;
    
    users.admin(username, function(success) {
-      console.log(success);
       if (success) {
          response.render('adminmanager', {username:username});
       }
@@ -14,7 +13,7 @@ module.exports = function(request, response) {
       else {
         response.render('home', {username:username});
         delete request.session.error;
-        //response.redirect('/');
+        response.redirect('/home');
    }
 });
 };
