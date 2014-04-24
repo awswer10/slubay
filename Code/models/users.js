@@ -79,6 +79,24 @@ module.exports.unmakeAdmin=function(name,callback){
         callback(true);
     });
 }
+
+//check to see if user is Admin
+module.exports.admin=function(name,callback){
+     db.users.findOne({name:name}, function(error, user) {
+        if (error) throw error;
+        
+        if (!user) {
+            callback(false);
+        }
+        
+        else {
+            if (admin) {
+                callback(true);
+            }
+            else
+                callback(false);
+        }
+});
 //Edit email
 module.exports.editEmail = function(name, newemail, callback) {
      db.users.update({name:name}, {$set:{email:newemail}}, function(error) {
