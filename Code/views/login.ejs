@@ -9,6 +9,21 @@
     </fieldset>
 </form>
 
+<form id="login" method="post" action="/login" role="form">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text" class="form-control" name="name" id="login_name" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="login_password" name="password" placeholder="Password">
+  </div>
+  <button id="login_submit" type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+
+
 <form id="register" method="post" action="/register">
     <fieldset>
         <legend>Register</legend>
