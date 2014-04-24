@@ -89,7 +89,7 @@ module.exports.admin=function(name,callback){
             callback(false);
         }
         else {
-            if (admin) {
+            if (user.admin) {
                 callback(true);
             }
             else
