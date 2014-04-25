@@ -2,12 +2,27 @@
 
 <p>Manage user page for <%= username %>.</p>
 
-<nav id = "usermanagenavigation">
+<!--<nav id = "usermanagenavigation">
     <ul>
         <li><a href="/">Home</a></li>
         <li ><a id="categorymanager" href="/home/manage/admin/category">Category Manager</a></li>
         <li ><a id="logout" href="/logout">Logout</a></li>
     </ul>
-</nav>
+</nav>-->
+
+
+
+<% include chunks/adminnav %>
+
+<form id="searchuser" role="form">
+	
+  <div class="form-group">
+    <label for="searchuser">Search for Username</label>
+    <input type="text" class="form-control" name="name" id="login_name" placeholder="Username">
+  </div>
+  
+  <button id="login_submit" type="submit" class="btn btn-primary">Search</button>
+  
+</form>
 
 <% include chunks/foot %>

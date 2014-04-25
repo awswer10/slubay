@@ -5,7 +5,6 @@ module.exports = function(request, response) {
    
    if (username) {
         response.render('home', {username:username});
-        
    }
    
    else {
