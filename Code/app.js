@@ -24,6 +24,8 @@ app.get('/home/manage/messages', require('./routes/messagemanager'));
 app.get('/home/manage/posts', require('./routes/postmanager'));
 app.get('/logout', require('./routes/logout'));
 app.get('*', require('./routes/default'));
+app.get('/home/:category/', require('./routes/category'));
+app.get('/home/:category/:post', require('./routes/post'));
 
 app.listen(8080);
 console.log('Server is up.');

@@ -53,7 +53,7 @@ module.exports.delete=function(name,callback){
 
 
 
-// Delete all messages
+// Delete all categories
 module.exports.deleteAll = function(callback) {
     db.categories.remove({}, function(error) {
         if (error) throw error;
