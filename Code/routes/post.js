@@ -1,4 +1,4 @@
-var items = require('../models/posts’);
+var posts = require('../models/posts');
 
 module.exports = function(request, response) {
    var url = request.url;

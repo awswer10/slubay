@@ -62,7 +62,7 @@ module.exports.deleteAll = function(callback) {
 };
 
 // Close the connection
-module.categories.close = function(callback) {
+module.exports.close = function(callback) {
     db.close(function(error) {
         if (error) throw error;
         callback();
