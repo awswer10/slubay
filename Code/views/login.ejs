@@ -1,15 +1,15 @@
 <% include chunks/head %>
 
-<form id="login" method="post" action="/login" role="form">
+<form class="col-xs-6" id="login" method="post" action="/login" role="form">
 	
   <div class="form-group">
     <label for="login_name">Username</label>
-    <input type="text" class="form-control" name="name" id="login_name" placeholder="Username">
+    <input type="text" class="form-control" name="name" id="login_name" placeholder="Username" required>
   </div>
   
   <div class="form-group">
     <label for="login_password">Password</label>
-    <input type="password" class="form-control" id="login_password" name="password" placeholder="Password">
+    <input type="password" class="form-control" id="login_password" name="password" placeholder="Password" required>
   </div>
   
   <button id="login_submit" type="submit" class="btn btn-primary">Submit</button>
@@ -20,26 +20,26 @@
 	Not a registered user? Make an account below.
 </div>
 
-<form id="register" method="post" action="/register" role="form">
+<form class="col-xs-6" id="register" method="post" action="/register" role="form">
 	
     <div class="form-group">
       <label for="register_realname">Real Name</label>
-      <input type="text" class="form-control" name="realname" id="register_realname" placeholder="Real Name">
+      <input type="text" class="form-control" name="realname" id="register_realname" placeholder="Real Name" required>
     </div>
 	
   <div class="form-group">
     <label for="register_name">Username</label>
-    <input type="text" class="form-control" name="name" id="register_name" placeholder="Username">
+    <input type="text" class="form-control" name="name" id="register_name" placeholder="Username" required>
   </div>
   
-  <div class="form-group">
+  <div class="form-group ">
     <label for="passwordInput">Password</label>
-    <input type="password" class="form-control" id="login_password" name="password" placeholder="Password">
+    <input type="password" class="form-control" id="login_password" name="password" placeholder="Password" required>
   </div>
   
   <div class="form-group">
     <label for="register_email">Email address</label>
-    <input type="email" class="form-control" name="name" id="register_email" placeholder="Enter email">
+    <input type="email" class="form-control" name="name" id="register_email" placeholder="Enter email" required>
   </div>
   
   
