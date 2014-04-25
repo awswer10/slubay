@@ -1,40 +1,50 @@
 <% include chunks/head %>
 
-<form id="login" method="post" action="/login">
-    <fieldset>
-        <legend>Login</legend>
-        <input id="login_name" type="text" name="name" placeholder="Username" required>
-        <input id="login_password" type="password" name="password" placeholder="Password" required>
-        <input id="login_submit" type="submit">
-    </fieldset>
-</form>
-
 <form id="login" method="post" action="/login" role="form">
+	
   <div class="form-group">
-    <label for="exampleInputEmail1">Username</label>
+    <label for="login_name">Username</label>
     <input type="text" class="form-control" name="name" id="login_name" placeholder="Username">
   </div>
+  
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
+    <label for="login_password">Password</label>
     <input type="password" class="form-control" id="login_password" name="password" placeholder="Password">
   </div>
-  <button id="login_submit" type="submit" class="btn btn-default">Submit</button>
+  
+  <button id="login_submit" type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
 
+<div>
+	Not a registered user? Make an account below.
+</div>
 
-
-
-<form id="register" method="post" action="/register">
-    <fieldset>
-        <legend>Register</legend>
-        <input id="register_name" type="text" name="name" placeholder="Username" required>
-        <input id="register_realname" type="text" name="realname" placeholder="Real Name" required>
-        <input id="register_password" type="password" name="password" placeholder="Password" required>
-        <input id="register_email" type="email" name="email" placeholder="Email" required>
-        <input id="register_year" type="number" name="year" placeholder="Year" required>
-        <input id="register_major" type="text" name="major" placeholder="Major" required>
-        <input id="register_submit" type="submit">
-    </fieldset>
+<form id="register" method="post" action="/register" role="form">
+	
+    <div class="form-group">
+      <label for="register_realname">Real Name</label>
+      <input type="text" class="form-control" name="realname" id="register_realname" placeholder="Real Name">
+    </div>
+	
+  <div class="form-group">
+    <label for="register_name">Username</label>
+    <input type="text" class="form-control" name="name" id="register_name" placeholder="Username">
+  </div>
+  
+  <div class="form-group">
+    <label for="passwordInput">Password</label>
+    <input type="password" class="form-control" id="login_password" name="password" placeholder="Password">
+  </div>
+  
+  <div class="form-group">
+    <label for="register_email">Email address</label>
+    <input type="email" class="form-control" name="email" id="register_email" placeholder="Enter email">
+  </div>
+  
+  
+  <button id="register_submit" type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
 
 <% if (error) { %>

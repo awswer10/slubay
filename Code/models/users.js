@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt');
 var db = mongojs('slubay', ['users']);
 
 // Register a new user
-module.exports.create = function(name,realname,password,email,year,major, callback) {
+module.exports.create = function(name,realname,password,email, callback) {
     
     bcrypt.hash(password, 10, function(error,hash) {
         if (error) throw error;
@@ -15,8 +15,8 @@ module.exports.create = function(name,realname,password,email,year,major, callba
             query: {name:name},
             
             //Admin and ban are automatically false; Other admin has to change this manually
-            update: {$setOnInsert:{password:hash,realname:realname,email:email,year:year,
-            major:major,admin:false,ban:false}},
+            update: {$setOnInsert:{password:hash,realname:realname,email:email,
+            admin:false,ban:false}},
             new: true,
             upsert: true
             
@@ -47,7 +47,7 @@ module.exports.unban=function(name,callback){
 //module.exports.unban=function(name,callback){
 //     db.users.findOne({name:name}, function(error, user) {
 //        if (error) throw error;
-//        
+//      
 //        if (!user) {
 //            callback(false);
 //        }
@@ -111,22 +111,6 @@ module.exports.editEmail = function(name, newemail, callback) {
 //Edit realname
 module.exports.editRealname = function(name, newrealname, callback) {
      db.users.update({name:name}, {$set:{realname:newrealname}}, function(error) {
-        if (error) throw error;
-        callback(true);
-    });
-}
-
-//Edit year
-module.exports.editYear = function(name, newyear, callback) {
-     db.users.update({name:name}, {$set:{year:newyear}}, function(error) {
-        if (error) throw error;
-        callback(true);
-    });
-}
-
-//Edit major
-module.exports.editMajor = function(name, newmajor, callback) {
-     db.users.update({name:name}, {$set:{major:newmajor}}, function(error) {
         if (error) throw error;
         callback(true);
     });
