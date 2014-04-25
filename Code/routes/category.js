@@ -1,7 +1,11 @@
 var categories = require('../models/categories');
+var posts = require('../models/posts');
 
 module.exports = function(request, response) {
-    categories.retrieveAll(function(allItems) {
+   var url = request.url;
+   var index = url.lastIndexOf("home/");
+   var categoryid = url.substring(index+1);
+   posts.retrieveCategory(categoryid, function(allItems) {
         response.render('category', {posts:allItems});
     });
 };

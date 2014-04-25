@@ -74,7 +74,14 @@ module.exports.retrieveAll = function(callback) {
         callback(posts);
     });
 };
-
+//Retrieve post given category
+module.exports.retrieveCategory = function(category,callback) {
+    
+    db.posts.find({category:category}, function(error,posts) {
+        if (error) throw error;
+        callback(posts);
+    });
+};
 //Retrieve one post
 module.exports.retrieve = function(_id, callback) {
     
@@ -103,7 +110,6 @@ module.exports.delete=function(_id,callback){
         if (error) throw error;
         callback(true);
      });
-     
 }
 
 //delete all post from one user
