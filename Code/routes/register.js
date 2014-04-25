@@ -8,7 +8,6 @@ module.exports = function(request,response) {
     var realname = validator.escape(request.body.realname);
     var email = validator.escape(request.body.email);
     var password = validator.escape(request.body.password);
-    console.log(name);
     
     users.create(name, realname, password, email, function(success) {
 

@@ -17,6 +17,8 @@ app.post('/register', require('./routes/register'));
 app.get('/home', require('./routes/home'));
 app.get('/home/manage/admin', require('./routes/adminmanager'));
 app.get('/home/manage/admin/user', require('./routes/usermanager'));
+app.post('/home/manage/admin/user/ban', require('./routes/ban'));
+app.post('/home/manage/admin/user/unban', require('./routes/unban'));
 app.get('/home/manage/admin/category', require('./routes/categorymanager'));
 app.get('/home/manage/messages', require('./routes/messagemanager'));
 app.get('/home/manage/posts', require('./routes/postmanager'));

@@ -83,9 +83,9 @@ module.exports.retrieveCategory = function(category,callback) {
     });
 };
 //Retrieve one post
-module.exports.retrieve = function(_id, callback) {
+module.exports.retrieve = function(itemid, callback) {
     
-    db.posts.findOne({_id:_id}, function(error,post) {
+    db.posts.findOne({_id:mongojs.ObjectId(itemid)}, function(error,post) {
         if (error) throw error;
        
         if (!post) {

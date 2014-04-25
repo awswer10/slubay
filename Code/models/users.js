@@ -29,38 +29,59 @@ module.exports.create = function(name,realname,password,email, callback) {
 };
 
 //ban a user
-module.exports.ban=function(name,callback){
-     db.users.update({name:name}, {$set:{ban:true}}, function(error) {
-        if (error) throw error;
-        callback(true);
-    });
-}
+//module.exports.ban=function(name,callback){
+//     db.users.update({name:name}, {$set:{ban:true}}, function(error) {
+//        if (error) throw error;
+//        callback(true);
+//    });
+//}
 //unban a user
-module.exports.unban=function(name,callback){
-     db.users.update({name:name}, {$set:{ban:false}}, function(error) {
+//module.exports.unban=function(name,callback){
+//     db.users.update({name:name}, {$set:{ban:false}}, function(error) {
+//        if (error) throw error;
+//        callback(true);
+//    });
+//}
+
+// Ban a user
+module.exports.ban=function(name,callback){
+     db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
-        callback(true);
+        
+        if (!user) {
+            callback(false);
+        }
+        
+        else {
+            user.ban=true;
+            db.users.save(user, function(error) {
+                if (error) throw error;
+                callback(true);
+            });
+          
+        }
     });
 }
 
-//module.exports.unban=function(name,callback){
-//     db.users.findOne({name:name}, function(error, user) {
-//        if (error) throw error;
-//      
-//        if (!user) {
-//            callback(false);
-//        }
-//        
-//        else {
-//            user.ban=false;
-//            db.users.save(user, function(error) {
-//                if (error) throw error;
-//                callback(true);
-//            });
-//          
-//        }
-//    });
-//}
+// Unban a user
+module.exports.unban=function(name,callback){
+     db.users.findOne({name:name}, function(error, user) {
+        if (error) throw error;
+        
+        if (!user) {
+            callback(false);
+        }
+        
+        else {
+            user.ban=false;
+            db.users.save(user, function(error) {
+                if (error) throw error;
+                callback(true);
+            });
+          
+        }
+    });
+}
 
 
 //make user admin

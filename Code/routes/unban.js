@@ -4,10 +4,10 @@ var validator = require('validator');
 
 module.exports = function(request,response) {
     
-    var banname = validator.escape(request.body.banname);
+    var unbanname = validator.escape(request.body.unbanname);
     var username = validator.escape(request.body.username);
     
-    users.ban(banname, function(success) {
+    users.unban(unbanname, function(success) {
         
         if (success) {
             response.redirect("/home/manage/admin/user");

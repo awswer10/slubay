@@ -3,15 +3,15 @@ var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 
 // Access the database
-var db = mongojs('slubay', ['categories']);
+var db = mongojs('slubay', ['messages']);
 
-// Create a new category
+// Create a new message
 module.exports.create = function(name,callback) {
     
    
     if (error) throw error;
         
-    db.categories.findAndModify({
+    db.messages.findAndModify({
         query: {name:name},
         update: {$setOnInsert:{name:name}},
             new: true,
@@ -24,27 +24,40 @@ module.exports.create = function(name,callback) {
         });
 };
 
-// retrieve all categories
+// retrieve all messages
 module.exports.retrieveAll = function(callback) {
-    db.categories.find({}, function(error) {
+    db.messages.find({}, function(error) {
         if (error) throw error;
         callback();
     });
 };
 
+// Retrieve one message
+module.exports.retrieve = function(itemid, callback) {
+    
+    db.messages.findOne({_id:mongojs.ObjectId(itemid)}, function(error,message) {
+        if (error) throw error;
+       
+        if (!message) {
+            callback(false);
+        }
+        else{
+            callback(message);
+        }
+    });
+};
 
-
-//count number of categories in database
+//count number of messages in database
 module.exports.count=function(callback){
-  db.categories.count(function(error,count){
+  db.messages.count(function(error,count){
         if (error) throw error;
         callback(count);
   });
 };
 
-//delete a category
+//delete a message
 module.exports.delete=function(name,callback){
-     db.categories.remove({name:name}, function(error) {
+     db.messages.remove({name:name}, function(error) {
         if (error) throw error;
         callback(true);
      });
@@ -53,9 +66,9 @@ module.exports.delete=function(name,callback){
 
 
 
-// Delete all categories
+// Delete all messages
 module.exports.deleteAll = function(callback) {
-    db.categories.remove({}, function(error) {
+    db.messages.remove({}, function(error) {
         if (error) throw error;
         callback();
     });

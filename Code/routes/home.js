@@ -9,7 +9,6 @@ module.exports = function(request, response) {
    if (username) {
       categories.retrieveAll(function(allItems) {
         response.render('home', {username:username,categories:allItems});
-        console.log(allItems);
       });
         
    }

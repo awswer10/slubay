@@ -2,9 +2,17 @@
 module.exports = function(request, response) {
     
    var username = request.session.username;
+   var error = request.session.error;
    
    if (username) {
-        response.render('usermanager', {username:username});
+      if (error === undefined) {
+         response.render('usermanager', {username:username,error:undefined});
+      }
+      else {
+         console.log(error);
+         response.render('usermanager', {username:username,error:request.session.error});
+         delete request.session.error;
+      }
    }
    
    else {

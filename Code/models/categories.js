@@ -32,7 +32,20 @@ module.exports.retrieveAll = function(callback) {
     });
 };
 
-
+// Retrieve one category
+module.exports.retrieve = function(itemid, callback) {
+    
+    db.categories.findOne({_id:mongojs.ObjectId(itemid)}, function(error,category) {
+        if (error) throw error;
+       
+        if (!category) {
+            callback(false);
+        }
+        else{
+            callback(category);
+        }
+    });
+};
 
 //count number of categories in database
 module.exports.count=function(callback){
