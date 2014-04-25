@@ -11,10 +11,10 @@ module.exports = function(request, response) {
       }
       
       else {
-        response.render('manage', {username:username});
+        response.render('home', {username:username});
         request.session.error = 'Admin privileges required.';
         delete request.session.error;
-        response.redirect('/home/manage');
+        response.redirect('/home');
    }
 });
 };
