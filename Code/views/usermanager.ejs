@@ -10,18 +10,21 @@
     </ul>
 </nav>-->
 
-
-
 <% include chunks/adminnav %>
-
-<form id="searchuser" role="form">
+<script>
+  function myfunction() {
+    src="../routes/ban.js"
+  }
+</script>
+<form id="searchuser" method="get" role="form">
 	
   <div class="form-group">
     <label for="searchuser">Search for Username</label>
     <input type="text" class="form-control" name="name" id="login_name" placeholder="Username">
   </div>
   
-  <button id="login_submit" type="submit" class="btn btn-primary">Search</button>
+  <button id="banuser" type="submit" onclick="myfunction()" class="btn btn-primary">Ban user</button>
+  <button id="unbanuser" type="submit" class="btn btn-primary">Unban user</button>
   
 </form>
 

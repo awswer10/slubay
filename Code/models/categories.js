@@ -26,9 +26,9 @@ module.exports.create = function(name,callback) {
 
 // retrieve all categories
 module.exports.retrieveAll = function(callback) {
-    db.categories.find({}, function(error) {
+    db.categories.find({}, function(error, allItems) {
         if (error) throw error;
-        callback();
+        callback(allItems);
     });
 };
 

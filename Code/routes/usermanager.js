@@ -8,7 +8,6 @@ module.exports = function(request, response) {
    }
    
    else {
-        
         response.render('login', {error:request.session.error});
         delete request.session.error;
         response.redirect('/');

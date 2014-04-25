@@ -43,7 +43,6 @@ module.exports.unban=function(name,callback){
     });
 }
 
-
 //module.exports.unban=function(name,callback){
 //     db.users.findOne({name:name}, function(error, user) {
 //        if (error) throw error;
