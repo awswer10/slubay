@@ -15,14 +15,16 @@ app.get('/', require('./routes/home'));
 app.post('/login', require('./routes/login'));
 app.post('/register', require('./routes/register'));
 app.get('/home', require('./routes/home'));
-//app.get('/home/textbooks', require('./routes/home'));
 app.get('/home/manage/admin', require('./routes/adminmanager'));
 app.get('/home/manage/admin/user', require('./routes/usermanager'));
+app.post('/home/manage/admin/user/ban', require('./routes/ban'));
+app.post('/home/manage/admin/user/unban', require('./routes/unban'));
 app.get('/home/manage/admin/category', require('./routes/categorymanager'));
-app.get('/home/manage', require('./routes/manage'));
 app.get('/home/manage/messages', require('./routes/messagemanager'));
 app.get('/home/manage/posts', require('./routes/postmanager'));
 app.get('/logout', require('./routes/logout'));
+app.get('/home/:category/',require('./routes/category'));
+app.get('/home/:category/:post', require('./routes/post'));
 app.get('*', require('./routes/default'));
 
 app.listen(8080);

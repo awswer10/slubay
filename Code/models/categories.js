@@ -26,13 +26,26 @@ module.exports.create = function(name,callback) {
 
 // retrieve all categories
 module.exports.retrieveAll = function(callback) {
-    db.categories.find({}, function(error) {
+    db.categories.find({}, function(error, allItems) {
         if (error) throw error;
-        callback();
+        callback(allItems);
     });
 };
 
-
+// Retrieve one category
+module.exports.retrieve = function(itemid, callback) {
+    
+    db.categories.findOne({_id:mongojs.ObjectId(itemid)}, function(error,category) {
+        if (error) throw error;
+       
+        if (!category) {
+            callback(false);
+        }
+        else{
+            callback(category);
+        }
+    });
+};
 
 //count number of categories in database
 module.exports.count=function(callback){
@@ -53,7 +66,7 @@ module.exports.delete=function(name,callback){
 
 
 
-// Delete all messages
+// Delete all categories
 module.exports.deleteAll = function(callback) {
     db.categories.remove({}, function(error) {
         if (error) throw error;
@@ -62,7 +75,7 @@ module.exports.deleteAll = function(callback) {
 };
 
 // Close the connection
-module.categories.close = function(callback) {
+module.exports.close = function(callback) {
     db.close(function(error) {
         if (error) throw error;
         callback();

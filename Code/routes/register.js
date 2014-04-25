@@ -10,7 +10,7 @@ module.exports = function(request,response) {
     var password = validator.escape(request.body.password);
     
     users.create(name, realname, password, email, function(success) {
-        
+
         if (success) {
             request.session.username = name;
             request.session.realname = realname;

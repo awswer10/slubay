@@ -1,10 +1,15 @@
 // Index page: home page, or login
+var categories = require('../models/categories');
+var posts = require('../models/posts');
+
 module.exports = function(request, response) {
     
    var username = request.session.username;
    
    if (username) {
-        response.render('home', {username:username});
+      categories.retrieveAll(function(allItems) {
+        response.render('home', {username:username,categories:allItems});
+      });
         
    }
    

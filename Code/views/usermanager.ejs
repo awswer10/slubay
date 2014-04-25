@@ -2,12 +2,32 @@
 
 <p>Manage user page for <%= username %>.</p>
 
-<nav id = "usermanagenavigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li ><a id="categorymanager" href="/home/manage/admin/category">Category Manager</a></li>
-        <li ><a id="logout" href="/logout">Logout</a></li>
-    </ul>
-</nav>
+<% include chunks/adminnav %>
+
+<form id="banuser" method="post" action="/home/manage/admin/user/ban" role="form">
+	
+  <div class="form-group">
+    <label for="searchuser">Enter username</label>
+    <input type="text" class="form-control" name="banname" id="login_name" placeholder="Username" required>
+  </div>
+  
+  <button id="banuser" type="submit" class="btn btn-primary">Ban user</button>
+  
+</form>
+
+<form id="unbanuser" method="post" action="/home/manage/admin/user/unban" role="form">
+	
+  <div class="form-group">
+    <label for="searchuser">Enter username</label>
+    <input type="text" class="form-control" name="unbanname" id="login_name" placeholder="Username" required>
+  </div>
+  
+  <button id="unbanuser" type="submit" class="btn btn-primary">Unban user</button>
+  
+</form>
+
+<% if (error) { %>
+    <p id="error"><%= error %></p>
+<% } %>
 
 <% include chunks/foot %>

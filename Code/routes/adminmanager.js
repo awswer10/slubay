@@ -6,15 +6,15 @@ module.exports = function(request, response) {
    var username = request.session.username;
    
    users.admin(username, function(success) {
-      console.log(success);
       if (success) {
          response.render('adminmanager', {username:username});
       }
       
       else {
         response.render('home', {username:username});
+        request.session.error = 'Admin privileges required.';
         delete request.session.error;
-        //response.redirect('/');
+        response.redirect('/home');
    }
 });
 };
