@@ -1,7 +1,11 @@
 <% include chunks/head %>
 
-<form class="col-xs-6" id="login" method="post" action="/login" role="form">
-	
+<h1 class="text-center">Welcome to SLUbay</h1>
+<h3 class="text-center">SLUbay is an easy way to exchange goods and services with fellow Laurentians.</h3>
+
+<form class="col-xs-12 col-sm-6" id="login" method="post" action="/login" role="form">
+
+	<h4>Login</h4>
   <div class="form-group">
     <label for="login_name">Username</label>
     <input type="text" class="form-control" name="name" id="login_name" placeholder="Username" required>
@@ -12,16 +16,12 @@
     <input type="password" class="form-control" id="login_password" name="password" placeholder="Password" required>
   </div>
   
-  <button id="login_submit" type="submit" class="btn btn-primary">Submit</button>
+  <button id="login_submit" type="submit" class="btn btn-primary">Login</button>
   
 </form>
 
-<div>
-	Not a registered user? Make an account below.
-</div>
-
-<form class="col-xs-6" id="register" method="post" action="/register" role="form">
-	
+<form class="col-xs-12 col-sm-6" id="register" method="post" action="/register" role="form">
+	<h4>Create an account</h4>
     <div class="form-group">
       <label for="register_realname">Real Name</label>
       <input type="text" class="form-control" name="realname" id="register_realname" placeholder="Real Name" required>
@@ -43,7 +43,7 @@
   </div>
   
   
-  <button id="register_submit" type="submit" class="btn btn-primary">Submit</button>
+  <button id="register_submit" type="submit" class="btn btn-primary">Create an account</button>
   
 </form>
 
