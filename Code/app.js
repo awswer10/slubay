@@ -23,8 +23,8 @@ app.get('/home/manage/admin/category', require('./routes/categorymanager'));
 app.get('/home/manage/messages', require('./routes/messagemanager'));
 app.get('/home/manage/posts', require('./routes/postmanager'));
 app.get('/logout', require('./routes/logout'));
-app.get('/home/:id/',require('./routes/category'));
 app.get('/home/:id/:id', require('./routes/post'));
+app.get('/home/:id/',require('./routes/category'));
 app.get('*', require('./routes/default'));
 
 app.listen(8080);

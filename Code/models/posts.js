@@ -76,14 +76,18 @@ module.exports.retrieveAll = function(callback) {
     });
 };
 //Retrieve post given category
-module.exports.retrieveCategory = function(itemid,callback) {
+module.exports.retrieveCategory = function(category,callback) {
     
-    db.categories.find({_id:mongojs.ObjectId(itemid)}, function(error,category) {
+    //db.categories.find({_id:mongojs.ObjectId(itemid)}, function(error,category) {
+    //    if (error) throw error;
+    //    db.posts.find({category:category.name}, function(newerror,posts) {
+    //           if (newerror) throw newerror;
+    //           callback(posts);
+    //    });
+    //});
+    db.posts.find({category:category}, function(error,posts) {
         if (error) throw error;
-        db.posts.find({category:category.name}, function(newerror,posts) {
-               if (newerror) throw newerror;
-               callback(posts);
-        });
+        callback(posts);
     });
 };
 
