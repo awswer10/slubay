@@ -1,0 +1,12 @@
+<% include chunks/head %>
+<% include chunks/nav %>
+
+<h3><%= item.title %></h3>
+<p><%= item.contents %></p>
+<form method=“post” action=“/comment”>
+    <textarea name=“comment”></textarea>
+    <input type= “hidden” name=“itemid” value= “<%= item._id %>”>
+    <input type=“submit”>
+</form>
+
+<% include chunks/foot %>

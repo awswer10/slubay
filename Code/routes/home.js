@@ -7,8 +7,8 @@ module.exports = function(request, response) {
    var username = request.session.username;
    
    if (username) {
-      categories.retrieveAll(function(allItems) {
-        response.render('home', {username:username,categories:allItems});
+      categories.retrieveAll(function(categories) {
+        response.render('home', {username:username,categories:categories});
       });
         
    }
