@@ -47,6 +47,21 @@ module.exports.retrieve = function(itemid, callback) {
     });
 };
 
+// Retrieve one category name
+module.exports.retrieveName = function(itemid, callback) {
+    
+    db.categories.findOne({_id:mongojs.ObjectId(itemid)}, function(error,category) {
+        if (error) throw error;
+       
+        if (!category) {
+            callback(false);
+        }
+        else{
+            callback(category.name);
+        }
+    });
+};
+
 //count number of categories in database
 module.exports.count=function(callback){
   db.categories.count(function(error,count){
