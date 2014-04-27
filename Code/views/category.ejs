@@ -1,0 +1,14 @@
+<% include chunks/head %>
+<% include chunks/nav %>
+
+<p>List of all posts.</p>
+
+<table>
+    <% posts.forEach(function(item) { %>
+        <tr>
+            <td><a href=“/home/categoryid<%= item._id %>”><%= item.name %></a></td>
+        </tr>
+    <% }); %>
+</table>
+
+<% include chunks/foot %>

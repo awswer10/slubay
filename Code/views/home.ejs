@@ -3,4 +3,12 @@
 
 <p>Home page for <%= username %>.</p>
 
+<table>
+    <% categories.forEach(function(item) { %>
+        <tr>
+            <td><a href=“/home/<%= item._id %>”><%= item.name %></a></td>
+        </tr>
+    <% }); %>
+</table>
+
 <% include chunks/foot %>
