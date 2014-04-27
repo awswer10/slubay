@@ -5,7 +5,7 @@ module.exports = function(request, response) {
    var url = request.url;
    var index = url.lastIndexOf("home/");
    var categoryid = url.substring(index+1);
-   posts.retrieveCategory(categoryid, function(allItems) {
-        response.render('category', {posts:allItems});
+   posts.retrieveCategory(categoryid, function(posts) {
+        response.render('category', {posts:posts});
     });
 };
