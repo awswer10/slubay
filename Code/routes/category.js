@@ -6,6 +6,6 @@ module.exports = function(request, response) {
    var index = url.lastIndexOf("home/");
    var categoryid = url.substring(index+1);
    posts.retrieveCategory(categoryid, function(posts) {
-        response.render('category', {posts:posts});
+        response.render('category', {categoryid:categoryid, posts:posts});
     });
 };

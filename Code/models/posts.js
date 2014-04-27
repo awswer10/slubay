@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 
 // Access the database
 var db = mongojs('slubay', ['posts']);
+var db = mongojs('slubay', ['categories']);
 
 // Create a new post
 module.exports.create = function(user,title,category,description,date,views,comments,callback) {
@@ -12,7 +13,7 @@ module.exports.create = function(user,title,category,description,date,views,comm
     if (error) throw error;
         
     db.posts.findAndModify({
-        query: {_id:_id},
+        query: {title:title},
         update: {$setOnInsert:{user:user,title:title,category:category,date:date,views:views,
         comments:comments}},
             new: true,
@@ -26,32 +27,32 @@ module.exports.create = function(user,title,category,description,date,views,comm
 };
 
 //Edit tittle
-module.exports.editTitle = function(_id, newtitle, callback) {
-     db.posts.update({_id:_id}, {$set:{tittle:newtitle}}, function(error) {
+module.exports.editTitle = function(itemid, newtitle, callback) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{tittle:newtitle}}, function(error) {
         if (error) throw error;
         callback(true);
     });
 }
 
 //Edit category
-module.exports.editCategory = function(_id, newCategory, callback) {
-     db.posts.update({_id:_id}, {$set:{category:newCategory}}, function(error) {
+module.exports.editCategory = function(itemid, newCategory, callback) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{category:newCategory}}, function(error) {
         if (error) throw error;
         callback(true);
     });
 }
 
 //Edit description
-module.exports.editDescription = function(_id, newDescription, callback) {
-     db.posts.update({_id:_id}, {$set:{description:newDescription}}, function(error) {
+module.exports.editDescription = function(itemid, newDescription, callback) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{description:newDescription}}, function(error) {
         if (error) throw error;
         callback(true);
     });
 }
 
 //Edit date
-module.exports.editDate = function(_id, newDate, callback) {
-     db.posts.update({_id:_id}, {$set:{date:newDate}}, function(error) {
+module.exports.editDate = function(itemid, newDate, callback) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{date:newDate}}, function(error) {
         if (error) throw error;
         callback(true);
     });
@@ -59,8 +60,8 @@ module.exports.editDate = function(_id, newDate, callback) {
 
 
 //Edit views
-module.exports.editViews = function(_id, newviews, callback) {
-     db.posts.update({_id:_id}, {$set:{views:newviews}}, function(error) {
+module.exports.editViews = function(itemid, newviews, callback) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{views:newviews}}, function(error) {
         if (error) throw error;
         callback(true);
     });
@@ -75,13 +76,17 @@ module.exports.retrieveAll = function(callback) {
     });
 };
 //Retrieve post given category
-module.exports.retrieveCategory = function(category,callback) {
+module.exports.retrieveCategory = function(itemid,callback) {
     
-    db.posts.find({category:category}, function(error,posts) {
+    db.categories.find({_id:mongojs.ObjectId(itemid)}, function(error,category) {
         if (error) throw error;
-        callback(posts);
+        db.posts.find({category:category.name}, function(newerror,posts) {
+               if (newerror) throw newerror;
+               callback(posts);
+        });
     });
 };
+
 //Retrieve one post
 module.exports.retrieve = function(itemid, callback) {
     
@@ -105,8 +110,8 @@ module.exports.count=function(callback){
   });
 };
 //delete a post
-module.exports.delete=function(_id,callback){
-     db.posts.remove({_id:_id}, function(error) {
+module.exports.delete=function(itemid,callback){
+     db.posts.remove({_id:mongojs.ObjectId(itemid)}, function(error) {
         if (error) throw error;
         callback(true);
      });
