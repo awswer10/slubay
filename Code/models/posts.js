@@ -94,7 +94,7 @@ module.exports.retrieveCategory = function(categoryname,callback) {
 //Retrieve one post
 module.exports.retrieve = function(itemid, callback) {
     
-    db.posts.findOne({_id:mongojs.ObjectId(itemid)}, function(error,post) {
+    db.posts.findOne({_id:mongojs.ObjectId(itemid).toString()}, function(error,post) {
         if (error) throw error;
        
         if (!post) {
