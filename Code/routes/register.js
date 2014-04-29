@@ -8,21 +8,28 @@ module.exports = function(request,response) {
     var realname = validator.escape(request.body.realname);
     var email = validator.escape(request.body.email);
     var password = validator.escape(request.body.password);
-    
-    users.create(name, realname, password, email, function(success) {
+	
+	if (name === "" || realname  === ""  ||  email  === "" || password  === "") {
+        request.session.error = 'Must complete the form.';
+        response.redirect('/');
+	}
+	
+    else {
+	    users.create(name, realname, password, email, function(success) {
 
-        if (success) {
-            request.session.username = name;
-            request.session.realname = realname;
-            request.session.password = password;
-            request.session.email = email;
-            response.redirect('/home');
-        }
+	        if (success) {
+	            request.session.username = name;
+	            request.session.realname = realname;
+	            request.session.password = password;
+	            request.session.email = email;
+	            response.redirect('/home');
+	        }
         
-        else {
-            request.session.error = 'Username '+name+' is not available.';
-            response.redirect('/');
-        }
+	        else {
+	            request.session.error = 'Username '+name+' is not available.';
+	            response.redirect('/');
+	        }
         
-    });
+	    });
+	}
 };

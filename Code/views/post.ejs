@@ -1,17 +1,52 @@
 <% include chunks/head %>
 <% include chunks/nav %>
 
-<h3><%= post.title %></h3>
-<p><%= post.user %></p>
-<p><%= post.category %></p>
-<p><%= post.description %></p>
-<p><%= post.date %></p>
-<p><%= post.views %></p>
-<p><%= post.comments %></p>
+<body class="container">
+	<div class="container page-header">
+    	<h3><%= post.title %></h3>
+</div>
+<!-- Username and post information -->
+<div class="container col-xs-12 col-sm-3">
+	<h4>Posted by</h4>
+	<p class="lead"><%= post.user %></p>
+	<h4>Posted on</h4>
+	<p class="lead"><%= post.date %></p>
+	<button type="button" class="btn btn-warning btn-lg btn-block">Edit post</button>
+	<button type="button" class="btn btn-danger btn-lg btn-block">Delete post</button>
+</div>
+<!-- Description of post -->
+<div class="container col-xs-12 col-sm-9">
+	<p class="text-justify">
+		<%= post.description %>
+	</p>
+</div>
+<!-- Q&A Portion -->
+<div class="container  col-xs-12 col-sm-9">
+	<h4>Questions</h4>
+	<div class="panel panel-primary">
+	   	<div class="panel-heading">
+	     	<h3 class="panel-title">Lorem ipsum?</h3>
+	   	</div>
+	   	<div class="panel-body">
+		   	<p>
+			   	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			</p>
+	   	</div>
+	</div>
+ </div>
+
+
+<!-- <h3><%= post.title %></h3>
+@DONE <p><%= post.user %></p>
+@TODO <p><%= post.category %></p>
+@DONE <p><%= post.description %></p>
+@DONE <p><%= post.date %></p>
+@TODO <p><%= post.views %></p>
+@TODO <p><%= post.comments %></p>
 <form method="post" action="/home/categoryid/postid">
     <textarea name="comment"></textarea>
     <input type= "hidden" name="postid" value= "<%= post._id %>">
     <input type="submit">
-</form>node
+</form>node -->
 
 <% include chunks/foot %>
