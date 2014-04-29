@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt');
 
 // Access the database
 var db = mongojs('slubay', ['posts']);
-var db = mongojs('slubay', ['categories']);
+//var db = mongojs('slubay', ['categories']);
 
 // Create a new post
 module.exports.create = function(user,title,category,description,date,views,comments,callback) {
@@ -76,7 +76,7 @@ module.exports.retrieveAll = function(callback) {
     });
 };
 //Retrieve post given category
-module.exports.retrieveCategory = function(category,callback) {
+module.exports.retrieveCategory = function(categoryname,callback) {
     
     //db.categories.find({_id:mongojs.ObjectId(itemid)}, function(error,category) {
     //    if (error) throw error;
@@ -85,7 +85,7 @@ module.exports.retrieveCategory = function(category,callback) {
     //           callback(posts);
     //    });
     //});
-    db.posts.find({category:category}, function(error,posts) {
+    db.posts.find({category:categoryname}, function(error,posts) {
         if (error) throw error;
         callback(posts);
     });
