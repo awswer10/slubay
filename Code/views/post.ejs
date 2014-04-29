@@ -8,10 +8,10 @@
 <p><%= post.date %></p>
 <p><%= post.views %></p>
 <p><%= post.comments %></p>
-<form method=“post” action=“/home/categoryid/postid”>
-    <textarea name=“comment”></textarea>
-    <input type= “hidden” name=“postid” value= “<%= post._id %>”>
-    <input type=“submit”>
+<form method="post" action="/home/categoryid/postid">
+    <textarea name="comment"></textarea>
+    <input type= "hidden" name="postid" value= "<%= post._id %>">
+    <input type="submit">
 </form>node
 
 <% include chunks/foot %>
