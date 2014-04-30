@@ -1,14 +1,20 @@
 <% include chunks/head %>
 <% include chunks/nav %>
 
-<p>Home page for <%= username %>.</p>
-
-<table>
-    <% categories.forEach(function(item) { %>
-        <tr>
-            <td><a href="/home/<%= item._id %>"><%= item.name %></a></td>
-        </tr>
-    <% }); %>
-</table>
-
+<div class="container">
+	<p>Home page for <%= username %>.</p>
+</div>
+<div class="container">
+	<div class="col-xs-12 col-sm-6">
+		<h4>Categories</h4>
+		<div class="list-group">
+			<% categories.forEach(function(item) { %>
+			<a href="/home/<%= item._id %>" class="list-group-item">
+				<span class="badge">Post Count?</span>
+				<%= item.name %>
+			</a>
+			<% }); %>
+		</div>
+	</div>
+</div>
 <% include chunks/foot %>

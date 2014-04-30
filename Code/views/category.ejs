@@ -1,14 +1,17 @@
 <% include chunks/head %>
 <% include chunks/nav %>
 
-<p>List of all posts.</p>
-
-<table>
-    <% posts.forEach(function(item) { %>
-        <tr>
-            <td><a href="/home/<%= categoryid %>/<%= item._id %>"><%= item.title %></a></td>
-        </tr>
-    <% }); %>
-</table>
+<div class="container">
+	<div class="col-xs-12 col-sm-6">
+		<h4>Posts</h4>
+		<div class="list-group">
+			<% posts.forEach(function(item) { %>
+			<a href="/home/<%= categoryid %>/<%= item._id %>" class="list-group-item">
+				<%= item.title %>
+			</a>
+			<% }); %>
+		</div>
+	</div>
+</div>
 
 <% include chunks/foot %>
