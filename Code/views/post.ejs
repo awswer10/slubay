@@ -1,10 +1,10 @@
 <% include chunks/head %>
 <% include chunks/nav %>
 
-<body class="container">
-	<div class="container page-header">
-    	<h3><%= post.title %></h3>
+<div class="container page-header">
+	<h3><%= post.title %></h3>
 </div>
+<div class="container">
 <!-- Username and post information -->
 <div class="container col-xs-12 col-sm-3">
 	<h4>Posted by</h4>
@@ -34,16 +34,17 @@
 	   	</div>
 	</div>
  </div>
+</div>
 
 
 <!-- <h3><%= post.title %></h3>
-@DONE <p><%= post.user %></p>
-@TODO <p><%= post.category %></p>
-@DONE <p><%= post.description %></p>
-@DONE <p><%= post.date %></p>
-@TODO <p><%= post.views %></p>
-@TODO <p><%= post.comments %></p>
-<form method="post" action="/home/categoryid/postid">
+<p><%= post.user %></p>
+<p><%= post.category %></p>
+<p><%= post.description %></p>
+<p><%= post.date %></p>
+<p><%= post.views %></p>
+<p><%= post.comments %></p> -->
+<!-- <form method="post" action="/home/categoryid/postid">
     <textarea name="comment"></textarea>
     <input type= "hidden" name="postid" value= "<%= post._id %>">
     <input type="submit">
