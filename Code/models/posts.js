@@ -59,9 +59,9 @@ module.exports.editDate = function(itemid, newDate, callback) {
 }
 
 
-//Edit views
-module.exports.editViews = function(itemid, newviews, callback) {
-     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{views:newviews}}, function(error) {
+//increase views
+module.exports.increaseViews = function(itemid,callback) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{$inc:{views: 1}}}, function(error) {
         if (error) throw error;
         callback(true);
     });
@@ -93,8 +93,7 @@ module.exports.retrieveCategory = function(categoryname,callback) {
 
 //Retrieve one post
 module.exports.retrieve = function(itemid, callback) {
-    
-    db.posts.findOne({_id:mongojs.ObjectId(itemid).toString()}, function(error,post) {
+    db.posts.findOne({_id:mongojs.ObjectId(itemid)}, function(error,post) {
         if (error) throw error;
        
         if (!post) {
