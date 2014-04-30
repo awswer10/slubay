@@ -7,15 +7,14 @@ var db = mongojs('slubay', ['posts']);
 //var db = mongojs('slubay', ['categories']);
 
 // Create a new post
-module.exports.create = function(user,title,category,description,date,views,comments,callback) {
+module.exports.create = function(user,title,category,description,date,viewscallback) {
     
    
     if (error) throw error;
         
     db.posts.findAndModify({
         query: {title:title},
-        update: {$setOnInsert:{user:user,title:title,category:category,date:date,views:views,
-        comments:comments}},
+        update: {$setOnInsert:{user:user,title:title,category:category,date:date,views:views}},
             new: true,
             upsert: true
             
@@ -112,6 +111,15 @@ module.exports.count=function(callback){
         callback(count);
   });
 };
+
+//count number of post in one category
+module.exports.countCategory=function(categoryname,callback){
+  db.posts.find({category:categoryname}).count(function(error,count){
+        if (error) throw error;
+        callback(count);
+  });
+};
+
 //delete a post
 module.exports.delete=function(itemid,callback){
      db.posts.remove({_id:mongojs.ObjectId(itemid)}, function(error) {
