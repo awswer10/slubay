@@ -7,7 +7,7 @@ var db = mongojs('slubay', ['posts']);
 //var db = mongojs('slubay', ['categories']);
 
 // Create a new post
-module.exports.create = function(user,title,category,description,date,viewscallback) {
+module.exports.create = function(user,title,category,description,date,views,callback) {
     
    
     if (error) throw error;
@@ -103,6 +103,21 @@ module.exports.retrieve = function(itemid, callback) {
         }
     });
 };
+
+//Retrieve post ID given title
+module.exports.retrieveID = function(title, callback) {
+    db.posts.findOne({title:title}, function(error,post) {
+        if (error) throw error;
+       
+        if (!post) {
+            callback(false);
+        }
+        else{
+            callback(post._id);
+        }
+    });
+};
+
 
 //count number of post in the database
 module.exports.count=function(callback){
