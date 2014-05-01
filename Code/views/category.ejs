@@ -2,6 +2,9 @@
 <% include chunks/nav %>
 
 <div class="container">
+    <form id="createnewpost" method="post" action="/home/<%= categoryid %>/newpost" role="form">
+        <button id="createnewpost" type="submit" class="btn btn-primary">Create New Post</button>
+    </form>
 	<div class="col-xs-12 col-sm-6">
 		<h4>Posts</h4>
 		<div class="list-group">
@@ -13,5 +16,11 @@
 		</div>
 	</div>
 </div>
+
+<!--<div>
+    <form id="createnewpost" method="post" action="/home/<%= categoryid %>/newpost" role="form">
+        <button id="createnewpost" type="submit" class="btn btn-primary">Create New Post</button>
+    </form>
+</div>-->
 
 <% include chunks/foot %>

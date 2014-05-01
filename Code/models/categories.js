@@ -7,9 +7,6 @@ var db = mongojs('slubay', ['categories']);
 
 // Create a new category
 module.exports.create = function(name,callback) {
-    
-   
-    if (error) throw error;
         
     db.categories.findAndModify({
         query: {name:name},

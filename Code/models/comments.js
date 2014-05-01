@@ -7,9 +7,6 @@ var db = mongojs('slubay', ['comments']);
 
 // Create a new comment
 module.exports.create = function(postID,textfield,user,callback) {
-    
-   
-    if (error) throw error;
         
     db.comments.findAndModify({
         query: {},
