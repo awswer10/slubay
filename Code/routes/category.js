@@ -7,12 +7,9 @@ module.exports = function(request, response) {
    var categoryid = url.substring(index+5);
    categories.retrieveName(categoryid, function(categoryname){
       
-      //get the number of post with that category name
-      posts.countCategory(categoryname,function(countCategory){
-         var count=countCategory;
-      });
+    
       posts.retrieveCategory(categoryname, function(posts) {
-           response.render('category', {categoryid:categoryid, posts:posts,count:count});
+           response.render('category', {categoryid:categoryid, posts:posts});
       });
    });
 };
