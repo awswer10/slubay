@@ -144,8 +144,17 @@ module.exports.delete=function(itemid,callback){
 }
 
 //delete all post from one user
-module.exports.deleteuser=function(user,callback){
+module.exports.deleteUser=function(user,callback){
      db.posts.remove({user:user}, function(error) {
+        if (error) throw error;
+        callback(true);
+     });
+     
+}
+
+//delete all post from one category
+module.exports.deleteCategory=function(category,callback){
+     db.posts.remove({category:category}, function(error) {
         if (error) throw error;
         callback(true);
      });
