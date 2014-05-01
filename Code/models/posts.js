@@ -8,6 +8,9 @@ var db = mongojs('slubay', ['posts']);
 
 // Create a new post
 module.exports.create = function(user,title,category,description,date,views,callback) {
+    
+   
+    if (error) throw error;
         
     db.posts.findAndModify({
         query: {title:title},
@@ -18,7 +21,7 @@ module.exports.create = function(user,title,category,description,date,views,call
         }, function(error, post) {
             if (error) throw error;
             
-            callback(post);
+            callback(post._id);
         });
 };
 
