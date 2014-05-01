@@ -7,9 +7,6 @@ var db = mongojs('slubay', ['messages']);
 
 // Create a new message
 module.exports.create = function(name,callback) {
-    
-   
-    if (error) throw error;
         
     db.messages.findAndModify({
         query: {name:name},
