@@ -3,23 +3,28 @@ var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 
 // Access the database
-var db = mongojs('slubay', ['posts']);
+var db = mongojs('slubay', ['posts','categories']);
 //var db = mongojs('slubay', ['categories']);
 
 // Create a new post
 module.exports.create = function(user,title,category,description,date,views,callback) {
-        
-    db.posts.findAndModify({
-        query: {title:title},
-        update: {$setOnInsert:{user:user,title:title,category:category,description:description,date:date,views:views}},
-            new: true,
-            upsert: true
-            
-        }, function(error, post) {
-            if (error) throw error;
-            
-            callback(post);
-        });
+    db.categories.find({name:category},function(error,categoryobj){
+        console.log(categoryobj.name);
+        if (error) {
+            throw error;
+        }
+        db.posts.findAndModify({
+            query: {title:title},
+            update: {$setOnInsert:{user:user,title:title,category:category,categoryid:mongojs.ObjectId(categoryobj._id),description:description,date:date,views:views}},
+                new: true,
+                upsert: true
+                
+            }, function(error, post) {
+                if (error) throw error;
+                
+                callback(post);
+            });
+    });
 };
 
 //Edit tittle

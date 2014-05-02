@@ -1,4 +1,5 @@
 var posts = require('../models/posts');
+var comments = require('../models/comments');
 
 module.exports = function(request, response) {
    var url = request.url;
@@ -7,6 +8,8 @@ module.exports = function(request, response) {
    var index0= url.lastIndexOf("home/");
    var categoryid = url.substring(index0+5, index);
    posts.retrieve(postid, function(post) {
-       response.render('post', {categoryid:categoryid,postid:postid,post:post});
+       comments.retrievePostid(postid,function(comments){
+         response.render('post', {categoryid:categoryid,postid:postid,post:post,comments:comments});
+          });
       });
 };

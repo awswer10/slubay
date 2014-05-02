@@ -1,6 +1,7 @@
 // Login page: try to authenticate
 var categories = require('../models/categories');
 var posts = require('../models/posts');
+var comments = require('../models/comments');
 var validator = require('validator');
 
 module.exports = function(request,response) {
@@ -14,6 +15,8 @@ module.exports = function(request,response) {
     posts.delete(postid, function(success) {
         
         if (success) {
+            comments.deletePostid(postid, function() {
+            });
             response.redirect("/home/"+categoryid);
         }
         

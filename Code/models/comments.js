@@ -6,18 +6,12 @@ var bcrypt = require('bcrypt');
 var db = mongojs('slubay', ['comments']);
 
 // Create a new comment
-module.exports.create = function(postID,textfield,user,callback) {
+module.exports.create = function(postid,textfield,user,date,callback) {
         
-    db.comments.findAndModify({
-        query: {},
-        update: {$setOnInsert:{postID:mongojs.ObjectId(postID),textfield:textfield,user:user}},
-            new: true,
-            upsert: true
-            
-        }, function(error, comment) {
+    db.comments.insert({postid:mongojs.ObjectId(postid),textfield:textfield,user:user,date:date}, function(error, comment) {
             if (error) throw error;
             
-            callback(_id);
+            callback(comment);
         });
 };
 
@@ -29,7 +23,7 @@ module.exports.retrieveAll = function(callback) {
     });
 };
 
-// Retrieve one comment by ID
+// Retrieve one comment by id
 module.exports.retrieve = function(itemid, callback) {
     
     db.comments.findOne({_id:mongojs.ObjectId(itemid)}, function(error,comment) {
@@ -59,17 +53,17 @@ module.exports.retrieveUser = function(user, callback) {
     });
 };
 
-// Retrieve one comment by ID
-module.exports.retrievePostID = function(postid, callback) {
+// Retrieve one comment by id
+module.exports.retrievePostid = function(postid, callback) {
     
-    db.comments.findOne({postid:mongojs.ObjectId(postid)}, function(error,comment) {
+    db.comments.find({postid:mongojs.ObjectId(postid)}, function(error,comments) {
         if (error) throw error;
        
-        if (!comment) {
+        if (!comments) {
             callback(false);
         }
         else{
-            callback(comment);
+            callback(comments);
         }
     });
 };
@@ -90,16 +84,16 @@ module.exports.countUser=function(user,callback){
   });
 };
 
-//count number of comments in database by postID
-module.exports.countPostID=function(postid,callback){
-  db.comments.find({postid:mongojs.ObjectID(postid)}).count(function(error,count){
+//count number of comments in database by postid
+module.exports.countPostid=function(postid,callback){
+  db.comments.find({postid:mongojs.ObjectId(postid)}).count(function(error,count){
         if (error) throw error;
         callback(count);
   });
 };
 
 
-//delete a comment by ID
+//delete a comment by id
 module.exports.delete=function(itemid,callback){
      db.comments.remove({_id:mongojs.ObjectId(itemid)}, function(error) {
         if (error) throw error;
@@ -117,9 +111,9 @@ module.exports.deleteUser=function(user,callback){
      
 }
 
-//delete a comment by postID
-module.exports.deletePostID=function(postid,callback){
-     db.comments.remove({postid:mongojs.ObjectID(postid)}, function(error) {
+//delete a comment by postid
+module.exports.deletePostid=function(postid,callback){
+     db.comments.remove({postid:mongojs.ObjectId(postid)}, function(error) {
         if (error) throw error;
         callback(true);
      });
