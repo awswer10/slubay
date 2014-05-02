@@ -11,8 +11,6 @@ module.exports = function(request,response) {
    var index1 = url.lastIndexOf("/");
    var postid = url.substring(index0+5+24+1,index1);
    
-    console.log(categoryid);
-    console.log(postid);
     posts.delete(postid, function(success) {
         
         if (success) {

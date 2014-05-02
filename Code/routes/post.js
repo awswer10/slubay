@@ -10,4 +10,3 @@ module.exports = function(request, response) {
        response.render('post', {categoryid:categoryid,postid:postid,post:post});
       });
 };
-   

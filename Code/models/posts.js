@@ -120,7 +120,7 @@ module.exports.retrieveUser = function(user, callback) {
     db.posts.find({user:user}, function(error,posts) {
         if (error) throw error;
        
-        if (!post) {
+        if (!user) {
             callback(false);
         }
         else{

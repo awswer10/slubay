@@ -119,6 +119,26 @@ module.exports.admin=function(name,callback){
         }
     });
 }
+
+//check to see if user is ban
+module.exports.checkBan=function(name,callback){
+     db.users.findOne({name:name}, function(error, user) {
+        if (error) throw error;
+        
+        if (!user) {
+            callback(false);
+        }
+        else {
+            if (user.ban) {
+                callback(true);
+            }
+            else
+            {
+                callback(false);
+            }
+        }
+    });
+}
      
 //Edit email
 module.exports.editEmail = function(name, newemail, callback) {

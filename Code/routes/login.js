@@ -11,7 +11,16 @@ module.exports = function(request,response) {
         
         if (success) {
             request.session.username = name;
-            response.redirect('/home')
+            users.checkBan(name,function(ban){
+                if(ban){
+                    request.session.error = name+" is currently banned.";
+                    response.redirect('/home');
+                }
+                else{
+                    response.redirect('/home')
+                }
+            });
+            
         }
         
         else {
