@@ -14,10 +14,10 @@ module.exports.create = function(name,callback) {
             new: true,
             upsert: true
             
-        }, function(error, message) {
+        }, function(error, category) {
             if (error) throw error;
             
-            callback(_id);
+            callback(category);
         });
 };
 
@@ -55,6 +55,22 @@ module.exports.retrieveName = function(itemid, callback) {
         }
         else{
             callback(category.name);
+        }
+    });
+};
+
+
+// Retrieve one category ID
+module.exports.retrieveID = function(name, callback) {
+    
+    db.categories.findOne({name:name}, function(error,category) {
+        if (error) throw error;
+       
+        if (!category) {
+            callback(false);
+        }
+        else{
+            callback(category._id);
         }
     });
 };

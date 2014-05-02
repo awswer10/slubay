@@ -20,12 +20,15 @@ app.get('/home/manage/admin/user', require('./routes/usermanager'));
 app.post('/home/manage/admin/user/ban', require('./routes/ban'));
 app.post('/home/manage/admin/user/unban', require('./routes/unban'));
 app.get('/home/manage/admin/category', require('./routes/categorymanager'));
+app.post('/home/manage/admin/category/create', require('./routes/createcategory'));
+app.post('/home/manage/admin/category/delete', require('./routes/deletecategory'));
 app.get('/home/manage/messages', require('./routes/messagemanager'));
 app.get('/home/manage/posts', require('./routes/postmanager'));
 app.get('/logout', require('./routes/logout'));
 app.post('/home/:id/newpost', require('./routes/newpost'));
-app.post('/home/:id/new', require('./routes/submitnewpost'));
+app.post('/home/newpost', require('./routes/submitnewpost'));
 app.get('/home/:id/:id', require('./routes/post'));
+app.get('/home/:id/:id/delete', require('./routes/deletepost'));
 app.get('/home/:id', require('./routes/category'));
 app.get('*', require('./routes/default'));
 

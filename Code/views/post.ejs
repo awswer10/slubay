@@ -12,7 +12,7 @@
 	<h4>Posted on</h4>
 	<p class="lead"><%= post.date %></p>
 	<button type="button" class="btn btn-warning btn-lg btn-block">Edit post</button>
-	<button type="button" class="btn btn-danger btn-lg btn-block">Delete post</button>
+	<a href="/home/<%= categoryid %>/<%= postid %>/delete"><button type="button" class="btn btn-danger btn-lg btn-block">Delete post</button></a>
 </div>
 <!-- Description of post -->
 <div class="container col-xs-12 col-sm-9">

@@ -1,14 +1,28 @@
 <% include chunks/head %>
+<% include chunks/adminnav %>
 
 <p>Manage category page for <%= username %>.</p>
 
-<!--<nav id = "messagemanagenavigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li ><a id="usermanager" href="/home/manage/admin/user">User Manager</a></li>
-        <li ><a id="logout" href="/logout">Logout</a></li>
-    </ul>
-</nav>-->
+<form id="createcategory" method="post" action="/home/manage/admin/category/create" role="form">
+	
+  <div class="form-group">
+    <label for="category">Enter category name</label>
+    <input type="text" class="form-control" name="createcategoryname" id="category_name" placeholder="Category" required>
+  </div>
+  
+  <button id="createcategory" type="submit" class="btn btn-primary">Create New Category</button>
+  
+</form>
 
-<% include chunks/adminnav %>
+<form id="deletecategory" method="post" action="/home/manage/admin/category/delete" role="form">
+	
+  <div class="form-group">
+    <label for="searchcategory">Enter category</label>
+    <input type="text" class="form-control" name="deletecategoryname" id="category_name" placeholder="Category" required>
+  </div>
+  
+  <button id="deletecategory" type="submit" class="btn btn-primary">Delete Category</button>
+  
+</form>
+
 <% include chunks/foot %>
