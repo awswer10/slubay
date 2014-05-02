@@ -1,10 +1,14 @@
-// Index page: home page, or login
+var posts = require('../models/posts');
+
 module.exports = function(request, response) {
     
    var username = request.session.username;
    
    if (username) {
-        response.render('postmanager', {username:username});
+      posts.retrieveUser(username, function(posts){
+         response.render('postmanager', {username:username,posts:posts});
+      });
+      
    }
    
    else {

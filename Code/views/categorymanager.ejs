@@ -16,12 +16,15 @@
 
 <form id="deletecategory" method="post" action="/home/manage/admin/category/delete" role="form">
 	
-  <div class="form-group">
-    <label for="searchcategory">Enter category</label>
-    <input type="text" class="form-control" name="deletecategoryname" id="category_name" placeholder="Category" required>
-  </div>
+    <select name="deletecategoryname">
+        <% categories.forEach(function(item) { %>
+            <option class="list-group-item">
+                <%= item.name %>
+            </option>
+        <% }); %>
+    </select>
   
-  <button id="deletecategory" type="submit" class="btn btn-primary">Delete Category</button>
+    <button id="deletecategory" type="submit" class="btn btn-primary">Delete Category</button>
   
 </form>
 

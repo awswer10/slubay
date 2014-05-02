@@ -3,12 +3,15 @@
 
 <p>Post manager  page for <%= username %>.</p>
 
-<!--<nav id = "messagemanagenavigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li ><a id="messsagemanager" href="/home/manage/messages">Message Manager</a></li>
-        <li ><a id="logout" href="/logout">Logout</a></li>
-    </ul>
-</nav>-->
+<div class="col-xs-12 col-sm-6">
+        <h4>Posts</h4>
+        <div class="list-group">
+            <% posts.forEach(function(item) { %>
+            <a href="/home/<%= categoryid %>/<%= item._id %>" class="list-group-item">
+                    <%= item.title %>
+            </a>
+            <% }); %>
+        </div>
+</div>
 
 <% include chunks/foot %>

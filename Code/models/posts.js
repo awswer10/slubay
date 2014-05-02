@@ -115,6 +115,20 @@ module.exports.retrieveID = function(title, callback) {
     });
 };
 
+//Retrieve all posts of one user
+module.exports.retrieveUser = function(user, callback) {
+    db.posts.find({user:user}, function(error,posts) {
+        if (error) throw error;
+       
+        if (!post) {
+            callback(false);
+        }
+        else{
+            callback(posts);
+        }
+    });
+};
+
 
 //count number of post in the database
 module.exports.count=function(callback){
