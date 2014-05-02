@@ -1,6 +1,12 @@
 <% include chunks/head %>
 <% include chunks/nav %>
-
+<div class="container">
+	<ol class="breadcrumb">
+	  <li><a href="/home">Home</a></li>
+	  <li><a href="/home/<%= categoryid %>"><%= post.category %></a></li>
+	  <li class="active"><%= post.title %></li>
+	</ol>
+</div>
 <div class="container page-header">
 	<h3><%= post.title %></h3>
 </div>

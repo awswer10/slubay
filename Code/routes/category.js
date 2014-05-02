@@ -9,7 +9,7 @@ module.exports = function(request, response) {
       
     
       posts.retrieveCategory(categoryname, function(posts) {
-           response.render('category', {categoryid:categoryid, posts:posts});
+           response.render('category', {categoryid:categoryid, posts:posts, categoryname:categoryname});
       });
    });
 };
