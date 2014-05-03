@@ -7,7 +7,7 @@ var db = mongojs('slubay', ['posts','categories']);
 //var db = mongojs('slubay', ['categories']);
 
 // Create a new post
-module.exports.create = function(user,title,category,description,date,views,callback) {
+module.exports.create = function(user,title,category,description,views,callback) {
     db.categories.find({name:category},function(error,categoryobj){
         console.log(categoryobj.name);
         if (error) {
@@ -15,7 +15,7 @@ module.exports.create = function(user,title,category,description,date,views,call
         }
         db.posts.findAndModify({
             query: {title:title},
-            update: {$setOnInsert:{user:user,title:title,category:category,categoryid:mongojs.ObjectId(categoryobj._id),description:description,date:date,views:views}},
+            update: {$setOnInsert:{user:user,title:title,category:category,categoryid:mongojs.ObjectId(categoryobj._id),description:description,date:new Date(),views:views}},
                 new: true,
                 upsert: true
                 
@@ -76,6 +76,7 @@ module.exports.retrieveAll = function(callback) {
         callback(posts);
     });
 };
+
 //Retrieve post given category
 module.exports.retrieveCategory = function(categoryname,callback) {
     
@@ -91,6 +92,21 @@ module.exports.retrieveCategory = function(categoryname,callback) {
         callback(posts);
     });
 };
+
+//Retrieve post given category
+module.exports.retrieveRecent = function(callback) {
+
+	db.posts.find({
+		$query: {},
+		$orderby: {
+			date: -1
+		}
+	}, function(error, posts) {
+		if (error) throw error;
+		callback(posts);
+	});
+};
+
 
 //Retrieve one post
 module.exports.retrieve = function(itemid, callback) {

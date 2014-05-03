@@ -14,6 +14,7 @@ module.exports = function(request, response) {
 
 			posts.retrieveCategory(categoryname, function(posts) {
 				response.render('category', {
+					username:username,
 					categoryid: categoryid,
 					posts: posts,
 					categoryname: categoryname
