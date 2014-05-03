@@ -1,29 +1,43 @@
 <% include chunks/head %>
 <% include chunks/nav %>
 
-<div>
-    <div class="col-xs-12 col-sm-6">
-	<form id="newpost" method="post" action="/home/newpost" role="form">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required></input>
-            </div>
-            
-	    <select name="category">
-		<% categories.forEach(function(item) { %>
-		    <option class="list-group-item">
-		        <%= item.name %>
-		    </option>
-		<% }); %>
-	    </select>
-	    
-            <label for="title">Description</label>
-            <div class="form-group">
-                <textarea name="description" rows="4" cols="50" placeholder="Description" required></textarea>
-            </div>            
-            <button id="submitnewpost" type="submit" class="btn btn-primary">Submit Post</button>
-        </form>
-    </div>
+<div class="container">
+	<form class="col-xs-12 col-sm-6" id="newpost" method="post" action="/home/newpost" role="form">
+	    <div class="form-group">
+	        <label for="title">Title</label>
+	        <input type="text" class="form-control" name="title" id="title" placeholder="Title" required></input>
+	    </div>
+	    <div class="form-group">
+			<label for="category">Category</label>
+		    <select name="category" class="form-control" name="category">
+				<% categories.forEach(function(item) { %>
+			    <option class="list-group-item"><%= item.name %></option>
+				<% }); %>
+	   	 	</select>
+		</div>
+    
+	    <div class="form-group">
+			<label for="description">Description</label>
+	        <textarea class="form-control" name="description" rows="4" placeholder="Description" required></textarea>
+	    </div>            
+	    <button id="submitnewpost" type="submit" class="btn btn-primary">Submit Post</button>
+	</form>
+	<div class="container col-xs-12 col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Tips for successful posting</h3>
+			</div>
+			<div class="panel-body">
+				Below you'll find some guidelines for posting on SLUbay.
+			</div>
+			<ul class="list-group">
+			    <li class="list-group-item">Use a descriptive title. Don't be misleading.</li>
+			    <li class="list-group-item">Use the category that best reflects your post. This makes it easier for users to find what they're looking for.</li>
+			    <li class="list-group-item">Write a clear and concise description. Be sure to include any "gotchas" about the good or service you're advertising.</li>
+				<li class="list-group-item list-group-item-danger"><strong>Keep all posts appropriate. </strong>Profanity is prohibited, and any objective content will be deleted, and may lead to the banning of your account.</li>
+			  </ul>
+		</div>
+	</div>
 </div>
 
 <% include chunks/foot %>
