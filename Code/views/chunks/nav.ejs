@@ -14,21 +14,18 @@
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				<form class="navbar-form" role="search">
-				  <div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
-				  </div>
-				  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+				<form id="createnewpost" role="form" class="navbar-form" action="home/new">
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New Post</button>
 				</form>
 			</li>
 			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
-			  <ul class="dropdown-menu">
-				<li><a id="postmanager" href="/home/manage/posts">Post Manager</a></li>
-				<li><a id="adminmanager" href="/home/manage/admin">Admin Manager</a></li>
-				<li class="divider"></li>
-				<li><a id="logout" href="/logout">Logout</a></li>
-			  </ul>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a id="postmanager" href="/home/manage/posts">Post Manager</a></li>
+					<li><a id="adminmanager" href="/home/manage/admin">Admin Manager</a></li>
+					<li class="divider"></li>
+					<li><a id="logout" href="/logout">Logout</a></li>
+				</ul>
 			</li>
 		</ul>
 	</div><!--/.nav-collapse -->

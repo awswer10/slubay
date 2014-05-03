@@ -2,14 +2,13 @@
 <% include chunks/nav %>
 
 <div class="container">
+	<!-- Breadcrumb -->
 	<ol class="breadcrumb">
 	  <li><a href="/home">Home</a></li>
 	  <li class="active"><%= categoryname %></li>
 	</ol>
-
-    <form id="createnewpost" method="get" action="/home/new" role="form">
-        <button id="createnewpost" type="submit" class="btn btn-primary">Create New Post</button>
-    </form>
+	
+	<!-- List of posts -->
 	<div class="col-xs-12 col-sm-6">
 		<h4>Posts</h4>
 		<div class="list-group">
