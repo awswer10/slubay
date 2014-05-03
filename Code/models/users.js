@@ -250,6 +250,22 @@ module.exports.deleteAll = function(callback) {
     });
 };
 
+//Delete one user
+module.exports.delete = function(name, callback) {
+    
+    db.users.remove({name:name}, function(error,sucess) {
+        if (error) throw error;
+       
+        if (!sucess) {
+            callback(false);
+        }
+        else{
+            callback(true);
+        }
+    });
+};
+
+
 // Close the connection
 module.exports.close = function(callback) {
     db.close(function(error) {

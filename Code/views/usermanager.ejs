@@ -26,4 +26,15 @@
   
 </form>
 
+<form id="deleteuser" method="post" action="/home/manage/admin/user/delete" role="form">
+	
+  <div class="form-group">
+    <label for="searchuser">Enter username</label>
+    <input type="text" class="form-control" name="deletename" id="delete_name" placeholder="Username" required>
+  </div>
+  
+  <button id="deleteuser" type="submit" class="btn btn-primary">Delete user</button>
+  
+</form>
+
 <% include chunks/foot %>
