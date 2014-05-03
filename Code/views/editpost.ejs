@@ -1,0 +1,38 @@
+<% include chunks/head %>
+<% include chunks/nav %>
+
+<div>
+    <div class="col-xs-12 col-sm-6">
+	<form id="newpost" method="post" action="/home/<%= categoryid %>/<%= post._id %>/editpost" role="form">
+            
+            <div class="form-group">
+                <label for="title">Title</label>
+                <textarea rows="1" cols="25" name="title" id="title" required><%= post.title %></textarea>
+            </div>
+            
+	    <select name="category">
+		<% categories.forEach(function(item) { %>
+		    <% if (item.name == post.category) { %>
+                        <option class="list-group-item" selected>
+                            <%= item.name %>
+                        </option>
+                    <% } else { %>
+                        <option class="list-group-item">
+                            <%= item.name %>
+                        </option>
+                        <% }; %>
+                    
+		<% }); %>
+	    </select>
+	    
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" rows="4" cols="50" required><%= post.description %></textarea>
+            </div>            
+            
+            <button id="submitnewpost" type="submit" class="btn btn-primary">Submit Post</button>
+        </form>
+    </div>
+</div>
+
+<% include chunks/foot %>

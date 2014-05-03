@@ -56,6 +56,9 @@ module.exports = function(request, response) {
 					recentPosts: rePo
 				});
 			}
+                        //else {
+                        //    response.render('home', {username:username,categories:cats});
+                        //}
 		}
 
 

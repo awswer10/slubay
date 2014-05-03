@@ -13,13 +13,16 @@
 <div class="container">
 <!-- Username and post information -->
 <div class="container col-xs-12 col-sm-3">
-	<h4>Posted by</h4>
+	<h4>Posted by:</h4>
 	<p class="lead"><%= post.user %></p>
-	<h4>Posted on</h4>
+	<h4>Posted on:</h4>
 	<p class="lead"><%= post.date %></p>
-	<button type="button" class="btn btn-warning btn-lg btn-block">Edit post</button>
+        <h4>View count:</h4>
+        <p class="lead"><%= post.views%></p>
+	<a href="/home/<%= categoryid %>/<%= postid %>/edit"><button type="button" class="btn btn-warning btn-lg btn-block">Edit post</button></a>
 	<a href="/home/<%= categoryid %>/<%= postid %>/delete"><button type="button" class="btn btn-danger btn-lg btn-block">Delete post</button></a>
 </div>
+
 <!-- Description of post -->
 <div class="container col-xs-12 col-sm-9">
 	<p class="text-justify">
@@ -36,6 +39,7 @@
             <div class="list-group">
 		<% comments.forEach(function(item) { %>
                     <div><%= item.textfield %></div>
+                    <div>-<%= username %></div>
 		<% }); %>
 	    </div>
         </div>

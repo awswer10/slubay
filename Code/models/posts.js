@@ -9,15 +9,12 @@ var categories = require('../models/categories');
 
 // Create a new post
 module.exports.create = function(user,title,category,description,views,callback) {
-    db.categories.find({name:category},function(error,categoryobj){
-        console.log(categoryobj.name);
-        if (error) {
-            throw error;
-        }
-        db.posts.findAndModify({
+        
+        categories.retrieveID(category,function(categoryid) {
+            db.posts.findAndModify({
             
             query: {title:title},
-            update: {$setOnInsert:{user:user,title:title,category:category,categoryid:mongojs.ObjectId(categoryobj._id),description:description,date:new Date(),views:views}},
+            update: {$setOnInsert:{user:user,title:title,category:category,categoryid:categoryid,description:description,date:new Date(),views:views}},
                 new: true,
                 upsert: true
                 
@@ -26,12 +23,13 @@ module.exports.create = function(user,title,category,description,views,callback)
                 
                 callback(post);
             });
-    });
+        });
+        
 };
 
 //Edit tittle
 module.exports.editTitle = function(itemid, newtitle, callback) {
-     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{tittle:newtitle}}, function(error) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{title:newtitle}}, function(error) {
         if (error) throw error;
         callback(true);
     });
@@ -39,9 +37,11 @@ module.exports.editTitle = function(itemid, newtitle, callback) {
 
 //Edit category
 module.exports.editCategory = function(itemid, newCategory, callback) {
-     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{category:newCategory}}, function(error) {
-        if (error) throw error;
-        callback(true);
+    categories.retrieveID(newCategory,function(categoryid) {
+        db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{category:newCategory,categoryid:categoryid}}, function(error) {
+           if (error) throw error;
+           callback(true);
+        });
     });
 }
 
@@ -64,7 +64,7 @@ module.exports.editDate = function(itemid, newDate, callback) {
 
 //increase views
 module.exports.increaseViews = function(itemid,callback) {
-     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{$inc:{views: 1}}}, function(error) {
+     db.posts.update({_id:mongojs.ObjectId(itemid)}, {$inc:{views: 1}}, function(error) {
         if (error) throw error;
         callback(true);
     });

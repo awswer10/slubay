@@ -12,6 +12,7 @@ module.exports = function(request, response) {
 
 	if (username) {
 		try {
+                        posts.increaseViews(postid,function(){});
 			posts.retrieve(postid, function(post) {
 
 				var dateObj = new Date();
@@ -23,7 +24,7 @@ module.exports = function(request, response) {
 
 
 				comments.retrievePostid(postid, function(comments) {
-					response.render('post', {
+                                        response.render('post', {
 						username: username,
 						categoryid: categoryid,
 						postid: postid,

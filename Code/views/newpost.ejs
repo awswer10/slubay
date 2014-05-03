@@ -1,11 +1,12 @@
 <% include chunks/head %>
+<% include chunks/nav %>
 
 <div>
     <div class="col-xs-12 col-sm-6">
 	<form id="newpost" method="post" action="/home/newpost" role="form">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required></input>
             </div>
             
 	    <select name="category">

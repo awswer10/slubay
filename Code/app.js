@@ -29,6 +29,8 @@ app.post('/home/newpost', require('./routes/submitnewpost'));
 app.get('/home/new', require('./routes/newpost'));
 app.post('/home/:id/:id/newcomment', require('./routes/newcomment'));
 app.get('/home/:id/:id/delete', require('./routes/deletepost'));
+app.post('/home/:id/:id/editpost', require('./routes/submiteditpost'));
+app.get('/home/:id/:id/edit', require('./routes/editpost'));
 app.get('/home/:id/:id', require('./routes/post'));
 app.get('/home/:id', require('./routes/category'));
 app.get('*', require('./routes/default'));
