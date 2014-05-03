@@ -140,6 +140,7 @@ module.exports.checkBan=function(name,callback){
     });
 }
      
+
 //Edit email
 module.exports.editEmail = function(name, newemail, callback) {
      db.users.update({name:name}, {$set:{email:newemail}}, function(error) {
