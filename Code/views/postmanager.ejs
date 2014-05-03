@@ -7,7 +7,7 @@
         <h4>Posts</h4>
         <div class="list-group">
             <% posts.forEach(function(item) { %>
-            <a href="/home/<%= categoryid %>/<%= item._id %>" class="list-group-item">
+            <a href="/home/<%= item.categoryid %>/<%= item._id %>" class="list-group-item">
                     <%= item.title %>
             </a>
             <% }); %>

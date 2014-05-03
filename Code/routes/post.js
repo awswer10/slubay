@@ -2,6 +2,7 @@ var posts = require('../models/posts');
 var comments = require('../models/comments');
 
 module.exports = function(request, response) {
+   console.log('hello');
    var url = request.url;
    var index = url.lastIndexOf("/");
    var postid = url.substring(index+1);
