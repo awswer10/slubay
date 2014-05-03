@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 
 // Access the database
 var db = mongojs('slubay', ['posts','categories']);
+var categories = require('../models/categories');
 //var db = mongojs('slubay', ['categories']);
 
 // Create a new post
@@ -14,6 +15,7 @@ module.exports.create = function(user,title,category,description,views,callback)
             throw error;
         }
         db.posts.findAndModify({
+            
             query: {title:title},
             update: {$setOnInsert:{user:user,title:title,category:category,categoryid:mongojs.ObjectId(categoryobj._id),description:description,date:new Date(),views:views}},
                 new: true,
