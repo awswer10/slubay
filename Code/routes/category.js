@@ -10,17 +10,20 @@ module.exports = function(request, response) {
 	var username = request.session.username;
 
 	if (username) {
-		categories.retrieveName(categoryid, function(categoryname) {
-
-			posts.retrieveCategory(categoryname, function(posts) {
-				response.render('category', {
-					username:username,
-					categoryid: categoryid,
-					posts: posts,
-					categoryname: categoryname
+		try {
+			categories.retrieveName(categoryid, function(categoryname) {
+				posts.retrieveCategory(categoryname, function(posts) {
+					response.render('category', {
+						username: username,
+						categoryid: categoryid,
+						posts: posts,
+						categoryname: categoryname
+					});
 				});
 			});
-		});
+		} catch(e) {
+			response.render('default');
+		}
 	} else {
 		response.redirect("/");
 		delete request.session.error;
