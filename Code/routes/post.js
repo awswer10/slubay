@@ -14,44 +14,47 @@ module.exports = function(request, response) {
 
 	if (username) {
                   try {
-                          users.admin(username, function(success) {
-                              if (success) {
-                                 editDelete=true;
-                              } else {
-                                 posts.retrieve(postid,function(post) {
-                                    if (username == post.user) {
-                                       editDelete=true;
-                                    } else {
-                                       editDelete=false;
-                                    }
-                                 });
-                              }
-                           });
+                          
+                           
+                           
                      
                         posts.increaseViews(postid,function(){});
 			posts.retrieve(postid, function(post) {
-
-				var dateObj = new Date();
-				var month = dateObj.getUTCMonth();
-				var day = dateObj.getUTCDate();
-				var year = dateObj.getUTCFullYear();
-				var date = month + "/" + day + "/" + year;
-				post.date = date;
-
-
-				comments.retrievePostid(postid, function(comments) {
-                                        
-                                        
-                                          response.render('post', {
-						username: username,
-						categoryid: categoryid,
-						postid: postid,
-						post: post,
-						comments: comments,
-                                                editDelete:editDelete
-					});
-				});
-
+                              users.admin(username, function(success) {
+                                 
+                                 var dateObj = new Date();
+                                 var month = dateObj.getUTCMonth();
+                                 var day = dateObj.getUTCDate();
+                                 var year = dateObj.getUTCFullYear();
+                                 var date = month + "/" + day + "/" + year;
+                                 post.date = date;
+                                 var editDelete;
+                                 if (success) {
+                                      editDelete=true;
+                                   } else {
+                                      posts.retrieve(postid,function(post) {
+                                         if (username == post.user) {
+                                            editDelete=true;
+                                         } else {
+                                            editDelete=false;
+                                         }
+                                      });
+                                   }
+ 
+ 
+                                 comments.retrievePostid(postid, function(comments) {
+                                         
+                                           response.render('post', {
+                                                 username: username,
+                                                 categoryid: categoryid,
+                                                 postid: postid,
+                                                 post: post,
+                                                 comments: comments,
+                                                 editDelete:editDelete
+                                                
+                                         });
+                                 });
+                              });   
 
 			});
 		} catch(e) {
