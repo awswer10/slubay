@@ -37,4 +37,25 @@
   
 </form>
 
+<form id="makeadmin" method="post" action="/home/manage/admin/user/makeadmin" role="form">
+	
+  <div class="form-group">
+    <label for="searchuser">Enter username to make admin</label>
+    <input type="text" class="form-control" name="makeadminname" id="makeadmin_name" placeholder="Username" required>
+  </div>
+  
+  <button id="makeadmin" type="submit" class="btn btn-primary">Make admin</button>
+  
+</form>
+
+<form id="unmakeadmin" method="post" action="/home/manage/admin/user/unmakeadmin" role="form">
+	
+  <div class="form-group">
+    <label for="searchuser">Enter username to unmake admin</label>
+    <input type="text" class="form-control" name="unmakeadminname" id="unmakeadmin_name" placeholder="Username" required>
+  </div>
+  
+  <button id="makeadmin" type="submit" class="btn btn-primary">Unmake admin</button>
+  
+</form>
 <% include chunks/foot %>

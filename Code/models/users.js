@@ -86,17 +86,41 @@ module.exports.unban=function(name,callback){
 
 //make user admin
 module.exports.makeAdmin=function(name,callback){
-     db.users.update({name:name}, {$set:{admin:true}}, function(error) {
+    db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
-        callback(true);
+        
+        if (!user) {
+            callback(false);
+        }
+        
+        else {
+            user.admin=true;
+            db.users.save(user, function(error) {
+                if (error) throw error;
+                callback(true);
+            });
+          
+        }
     });
 }
 
 //unmake user admin
 module.exports.unmakeAdmin=function(name,callback){
-     db.users.update({name:name}, {$set:{admin:false}}, function(error) {
+    db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
-        callback(true);
+        
+        if (!user) {
+            callback(false);
+        }
+        
+        else {
+            user.admin=false;
+            db.users.save(user, function(error) {
+                if (error) throw error;
+                callback(true);
+            });
+          
+        }
     });
 }
 

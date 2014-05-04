@@ -15,6 +15,8 @@ app.get('/', require('./routes/home'));
 app.post('/login', require('./routes/login'));
 app.post('/register', require('./routes/register'));
 app.get('/home', require('./routes/home'));
+app.post('/home/manage/admin/user/unmakeadmin', require('./routes/unmakeadmin'));
+app.post('/home/manage/admin/user/makeadmin', require('./routes/makeadmin'));
 app.post('/home/manage/admin/user/delete', require('./routes/deleteuser'));
 app.post('/home/manage/admin/user/ban', require('./routes/ban'));
 app.post('/home/manage/admin/user/unban', require('./routes/unban'));
