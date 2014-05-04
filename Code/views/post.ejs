@@ -1,83 +1,114 @@
 <% include chunks/head %>
 <% include chunks/nav %>
 <div class="container">
+	
+	<!-- Breadcrumb bar -->
 	<ol class="breadcrumb">
-	  <li><a href="/home">Home</a></li>
-	  <li><a href="/home/<%= categoryid %>"><%= post.category %></a></li>
-	  <li class="active"><%= post.title %></li>
+		<li><a href="/home">Home</a></li>
+		<li><a href="/home/<%= categoryid %>"><%= post.category %></a></li>
+		<li class="active"><%= post.title %></li>
 	</ol>
-</div>
-<div class="container page-header">
-	<h3><%= post.title %></h3>
-</div>
-<div class="container">
-<!-- Username and post information -->
-<div class="container col-xs-12 col-sm-3">
-	<h4>Posted by:</h4>
-	<p class="lead"><%= post.user %></p>
-	<h4>Posted on:</h4>
-	<p class="lead"><%= post.date %></p>
-        <h4>View count:</h4>
-        <p class="lead"><%= post.views%></p>
-	<a href="/home/<%= categoryid %>/<%= postid %>/edit"><button type="button" class="btn btn-warning btn-lg btn-block">Edit post</button></a>
-	<a href="/home/<%= categoryid %>/<%= postid %>/delete"><button type="button" class="btn btn-danger btn-lg btn-block">Delete post</button></a>
+	
+	<!-- Page Header -->
+	<div class="page-header">
+		<h3><%= post.title %></h3>
+	</div>
+	
+	<!-- Row Containing Post Info + Description -->
+	<div class="row">
+		
+		<!-- Username and post information -->
+		<div class="container col-xs-12 col-sm-3">
+		
+			<h4>Posted by:</h4>
+			<p class="lead"><%= post.user %></p>
+		
+			<h4>Posted on:</h4>
+			<p class="lead"><%= post.date %></p>
+		
+			<h4>View count:</h4>
+			<p class="lead"><%= post.views%></p>
+		
+		
+			<!-- Edit and Delete Buttons  -->
+			<%if (editDelete) {%>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Post Options <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/home/<%= categoryid %>/<%= postid %>/edit">Edit Post</a></li>
+					<li><a href="/home/<%= categoryid %>/<%= postid %>/delete">Delete Post</a></li>
+				</ul>
+			</div>
+			<%}%>
+		</div>
+
+		<!-- Description of post -->
+		<div class="col-xs-12 col-sm-9">
+			<h4>Description:</h4>
+			<p class="text-justify lead"><%= post.description %></p>
+			
+			
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<h4>User Comments</h4>
+							</div>
+							<div class="col-sm-6 text-right">
+ 
+									<button class="btn btn-default btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> Add Comment</button>
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<ul class="list-group">
+					<%var count = 0%>
+					<% comments.forEach(function(item) { %>
+						<%count++%>
+						
+						<li class="list-group-item">
+							<h5 class="list-group-item-heading"><%= item.user %>
+							<% if (item.user === post.user){ %>
+										<span class="label label-success"><span class="glyphicon glyphicon-ok-circle"></span> Post Owner </span>
+								<%}%>							
+							</h5>
+							<p><%= item.textfield %></p>
+						</li>
+				
+						<% }); %>
+						<% if (count == 0) {%>
+							<li class="list-group-item">No comments to display</li>
+							<%}%>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
-<!-- Description of post -->
-<div class="container col-xs-12 col-sm-9">
-	<p class="text-justify">
-		<%= post.description %>
-	</p>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="form" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Add a comment</h4>
+			</div>
+			
+				<div class="modal-body">
+					<form method="post" action="/home/<%= categoryid %>/<%= postid %>/newcomment" role="form">
+						<div class="form-group">
+							<textarea name="comment" class ="form-control" rows="4" placeholder="Comment" required></textarea>
+						</div>            
+						<button id="submitnewcomment" type="submit" class="btn btn-primary">Submit Comment</button>
+					</form>
+				</div>
+		</div>
+	</div>
 </div>
-
-<div class="container  col-xs-12 col-sm-9">
-	<div class="panel panel-primary">
-	    <div class="panel-heading">
-	     	<h3 class="panel-title">User comments</h3>
-	    </div>
-            
-            <div class="list-group">
-		<% comments.forEach(function(item) { %>
-                    <div><%= item.textfield %></div>
-                    <div>-<%= username %></div>
-		<% }); %>
-	    </div>
-        </div>
- </div>
-</div>
-
-<!-- Q&A Portion -->
-<div class="container  col-xs-12 col-sm-9">
-	<div class="panel panel-primary">
-	    <div class="panel-heading">
-	     	<h3 class="panel-title">Enter your comments and questions.</h3>
-	    </div>
-            <form method="post" action="/home/<%= categoryid %>/<%= postid %>/newcomment" role="form">
-                <div class="form-group">
-                    <textarea name="comment" rows="4" cols="50" placeholder="Comment" required></textarea>
-                </div>            
-                <button id="submitnewcomment" type="submit" class="btn btn-primary">Submit Comment</button>
-            </form>
-        </div>
- </div>
-</div>
-
- <!--<div class="container  col-xs-12 col-sm-9" id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
- <link rel="stylesheet" type="text/css" href="http://www.htmlcommentbox.com/static/skins/default/skin.css" />
- <script type="text/javascript" language="javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={  };} (function(){s=document.createElement("script");s.setAttribute("type","text/javascript");s.setAttribute("src", "http://www.htmlcommentbox.com/jread?page="+escape((window.hcb_user && hcb_user.PAGE)||(""+window.location)).replace("+","%2B")+"&opts=470&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->
-
-
-<!-- <h3><%= post.title %></h3>
-<p><%= post.user %></p>
-<p><%= post.category %></p>
-<p><%= post.description %></p>
-<p><%= post.date %></p>
-<p><%= post.views %></p>
-<p><%= post.comments %></p> -->
-<!-- <form method="post" action="/home/categoryid/postid">
-    <textarea name="comment"></textarea>
-    <input type= "hidden" name="postid" value= "<%= post._id %>">
-    <input type="submit">
-</form>node -->
 
 <% include chunks/foot %>
