@@ -1,3 +1,5 @@
+// Post page
+
 var posts = require('../models/posts');
 var comments = require('../models/comments');
 var users = require('../models/users');
@@ -12,12 +14,15 @@ module.exports = function(request, response) {
 	var username = request.session.username;
         var editDelete;
 
+        // If user is logged in, renders individual post with
+        // updated information (view count), otherwise redirects
+        // to login page.
 	if (username) {
                   try {
                           
                            
                            
-                     
+                        // Increases view count and retrieves post
                         posts.increaseViews(postid,function(){});
 			posts.retrieve(postid, function(post) {
                               users.admin(username, function(success) {
@@ -42,6 +47,7 @@ module.exports = function(request, response) {
                                    }
  
  
+                                 // retrieves all comments on post
                                  comments.retrievePostid(postid, function(comments) {
 					users.retrieveEmail(username,function(email){
 						response.render('post', {

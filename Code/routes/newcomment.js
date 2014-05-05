@@ -1,3 +1,5 @@
+// New comment page
+
 var comments = require('../models/comments');
 var categories = require('../models/categories');
 var posts = require('../models/posts');
@@ -18,7 +20,8 @@ module.exports = function(request,response) {
     var index1 = url.lastIndexOf("/");
     var postid = url.substring(index0+5+24+1,index1);
     
-    
+    // Adds user's comment to the database, redirects to post with
+    // new comment added.
     comments.create(postid,comment,user,date,function(comment) {
         response.redirect('/home/'+categoryid+'/'+postid);
     });
