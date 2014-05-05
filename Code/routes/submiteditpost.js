@@ -1,3 +1,5 @@
+// Submit edited post page
+
 var users = require('../models/users');
 var categories = require('../models/categories');
 var posts = require('../models/posts');
@@ -12,8 +14,8 @@ module.exports = function(request,response) {
     var index= url.lastIndexOf("home/");
     var postid= url.substring(index+5+24+1,index+5+24+1+24);
     
-    console.log(title);
-    
+    // After retrieving information from the form, post is updated
+    // with the new information.  User is redirected to updated post.
     posts.editTitle(postid,title,function(success) {
         
     });

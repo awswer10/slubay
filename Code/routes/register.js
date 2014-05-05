@@ -9,11 +9,14 @@ module.exports = function(request,response) {
     var email = validator.escape(request.body.email);
     var password = validator.escape(request.body.password);
 	
+        // Checks to make sure all fields are entered.
 	if (name === "" || realname  === ""  ||  email  === "" || password  === "") {
         request.session.error = 'Must complete the form.';
         response.redirect('/');
 	}
 	
+    // If they are, new user is created and redirected to home page.
+    // returns error if username is unavailable.
     else {
 	    users.create(name, realname, password, email, function(success) {
 

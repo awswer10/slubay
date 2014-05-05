@@ -9,6 +9,9 @@ module.exports = function(request,response) {
     
     users.login(name, password, function(success) {
         
+        // Attempts to render home page as long as the user is not
+        // banned.  Also checks to make sure entered username and
+        // password exist.
         if (success) {
             request.session.username = name;
             users.checkBan(name,function(ban){

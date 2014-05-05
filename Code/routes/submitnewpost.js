@@ -1,3 +1,5 @@
+// Submit new post page
+
 var users = require('../models/users');
 var categories = require('../models/categories');
 var posts = require('../models/posts');
@@ -9,6 +11,8 @@ module.exports = function(request,response) {
     var category = validator.escape(request.body.category);
     var user = request.session.username;
     
+    // Checks to make sure post doesn't already exist with same title,
+    // creates new post if it is unique.  Returns error otherwise.
     posts.titleExist(title, function(success) {
         if (!success) {
             posts.create(user,title,category,description,0,function(post) {

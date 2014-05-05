@@ -1,4 +1,4 @@
-// Login page: try to authenticate
+// Make admin page
 var users = require('../models/users');
 var validator = require('validator');
 
@@ -10,6 +10,8 @@ module.exports = function(request,response) {
     //check to see if the login actor is admin
     users.admin(username, function(success){
         
+        // If they are, check to see if entered username exists,
+        // make that user admin if it does, return error if it does not.
         if (success) {
             users.makeAdmin(makeadminname, function(success1) {
                

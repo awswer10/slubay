@@ -1,4 +1,4 @@
-// Login page: try to authenticate
+// Delete post page
 var categories = require('../models/categories');
 var posts = require('../models/posts');
 var comments = require('../models/comments');
@@ -12,6 +12,8 @@ module.exports = function(request,response) {
    var index1 = url.lastIndexOf("/");
    var postid = url.substring(index0+5+24+1,index1);
    
+    // Deletes a post from the posts database and returns user to
+    // the category page.
     posts.delete(postid, function(success) {
         
         if (success) {
