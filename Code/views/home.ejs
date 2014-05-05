@@ -29,4 +29,9 @@
 		</div>
 	</div>
 </div>
+<% if (error) { %>
+    <div class="col-xs-12">
+        <div class="alert alert-danger"><%= error %></div>
+    </div>
+<% } %>
 <% include chunks/foot %>

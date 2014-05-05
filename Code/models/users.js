@@ -277,14 +277,19 @@ module.exports.deleteAll = function(callback) {
 //Delete one user
 module.exports.delete = function(name, callback) {
     
-    db.users.remove({name:name}, function(error,sucess) {
+     db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
-       
-        if (!sucess) {
+        
+        if (!user) {
             callback(false);
         }
-        else{
-            callback(true);
+        
+        else {
+            db.users.remove({name:name}, function(error, success) {
+                if (error) throw error;
+                
+                callback(success);
+            })
         }
     });
 };

@@ -53,8 +53,10 @@ module.exports = function(request, response) {
 				response.render('home', {
 					username: username,
 					categories: cats,
-					recentPosts: rePo
+					recentPosts: rePo,
+                                        error:request.session.error1
 				});
+                                delete request.session.error1;
 			}
                         //else {
                         //    response.render('home', {username:username,categories:cats});

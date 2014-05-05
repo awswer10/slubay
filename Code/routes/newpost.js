@@ -7,7 +7,8 @@ module.exports = function(request,response) {
     var categoryid = url.substring(index+5,index0);
     var username = request.session.username;
     categories.retrieveAll(function(categories) {
-        response.render('newpost', {categoryid:categoryid,categories:categories,username:username});
+        response.render('newpost', {categoryid:categoryid,categories:categories,username:username,error:request.session.error});
+        delete request.session.error;
      });
     
 }

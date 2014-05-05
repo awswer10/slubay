@@ -125,7 +125,7 @@ module.exports.retrieve = function(itemid, callback) {
 };
 
 //Retrieve post ID given title
-module.exports.retrieveID = function(title, callback) {
+module.exports.retrieveTitle = function(title, callback) {
     db.posts.findOne({title:title}, function(error,post) {
         if (error) throw error;
        
@@ -137,6 +137,21 @@ module.exports.retrieveID = function(title, callback) {
         }
     });
 };
+
+//see if title has already exist
+module.exports.titleExist = function(title, callback) {
+    db.posts.findOne({title:title}, function(error,post) {
+        if (error) throw error;
+       
+        if (!post) {
+            callback(false);
+        }
+        else{
+            callback(true);
+        }
+    });
+};
+
 
 //Retrieve all posts of one user
 module.exports.retrieveUser = function(user, callback) {

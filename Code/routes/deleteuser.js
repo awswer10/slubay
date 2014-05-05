@@ -10,13 +10,15 @@ module.exports = function(request,response) {
     var username = validator.escape(request.body.username);
     
     posts.deleteUser(deletename, function(success){
-        if (success) {
-            comments.deleteUser(deletename, function(){});
-            users.delete(deletename, function() {});
-            response.redirect("/home/manage/admin/user");
-        } else {
-            request.session.error = "User does not exist.";
-            response.redirect("/home/manage/admin/user");
-        }
+        comments.deleteUser(deletename, function(){});
+        users.delete(deletename, function(success) {
+            if (success) {
+                response.redirect("/home/manage/admin/user");
+            }
+            else {
+                request.session.error = "User does not exist.";
+                response.redirect("/home/manage/admin/user");
+        }});
+         
     });
 };

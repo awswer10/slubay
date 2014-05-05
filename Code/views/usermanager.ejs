@@ -58,4 +58,9 @@
   <button id="makeadmin" type="submit" class="btn btn-primary">Unmake admin</button>
   
 </form>
+<% if (error) { %>
+    <div class="col-xs-12">
+        <div class="alert alert-danger"><%= error %></div>
+    </div>
+<% } %>
 <% include chunks/foot %>

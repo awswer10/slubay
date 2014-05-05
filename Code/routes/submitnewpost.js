@@ -9,13 +9,20 @@ module.exports = function(request,response) {
     var category = validator.escape(request.body.category);
     var user = request.session.username;
     
-    posts.create(user,title,category,description,0,function(post) {
-        var postid = post._id;
-        
-        categories.retrieveID(category, function(categoryid){
-            response.redirect('/home/'+categoryid+'/'+postid);
-        });
-    });
+    posts.titleExist(title, function(success) {
+        if (!success) {
+            posts.create(user,title,category,description,0,function(post) {
+                var postid = post._id;
+                
+                categories.retrieveID(category, function(categoryid){
+                    response.redirect('/home/'+categoryid+'/'+postid);
+                });
+            });
+        } else {
+            request.session.error="Title already exists.";
+            response.redirect("/home/new")
+        }
+    })
     
     
     

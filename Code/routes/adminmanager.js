@@ -11,9 +11,8 @@ module.exports = function(request, response) {
       }
       
       else {
-        request.session.error = 'Admin privileges required.';
+        request.session.error1 = 'Admin privileges required.';
         response.redirect('/home');
-        delete request.session.error;
         
    }
 });

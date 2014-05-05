@@ -4,6 +4,7 @@ module.exports = function(request, response) {
    var username = request.session.username;
    
    if (username) {
-         response.render('usermanager', {username:username});
+         response.render('usermanager', {username:username,error:request.session.error});
+         delete request.session.error;
          }
 };
