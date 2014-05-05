@@ -43,16 +43,18 @@ module.exports = function(request, response) {
  
  
                                  comments.retrievePostid(postid, function(comments) {
-                                         
-                                           response.render('post', {
-                                                 username: username,
-                                                 categoryid: categoryid,
-                                                 postid: postid,
-                                                 post: post,
-                                                 comments: comments,
-                                                 editDelete:editDelete
-                                                
-                                         });
+					users.retrieveEmail(username,function(email){
+						response.render('post', {
+						      username: username,
+						      categoryid: categoryid,
+						      postid: postid,
+						      post: post,
+						      comments: comments,
+						      editDelete:editDelete,
+						      email:email
+						     
+					      });
+					});
                                  });
                               });   
 

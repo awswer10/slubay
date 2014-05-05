@@ -258,6 +258,21 @@ module.exports.retrieve = function(name, callback) {
     });
 };
 
+//Retrieve one user
+module.exports.retrieveEmail = function(name, callback) {
+    
+    db.users.findOne({name:name}, function(error,user) {
+        if (error) throw error;
+       
+        if (!user) {
+            callback(false);
+        }
+        else{
+            callback(user.email);
+        }
+    });
+};
+
 //count number of user in the database
 module.exports.count=function(callback){
   db.users.count(function(error,count){
