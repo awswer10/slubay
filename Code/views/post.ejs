@@ -29,13 +29,13 @@
 			<h4>View count:</h4>
 			<p class="lead"><%= post.views%></p>
 			<div class="btn-group-vertical">
-				<button class="btn btn-default " href="#" onclick="javascript:window.location.href='mailto:<%=email%>?subject=SLUbay Message about <%=post.title%> from <%=username%>&body=Dear <%=post.user%>, %0D%0A %0D%0A <%=username%> (a fellow SLUbay user) found your post <%=post.title%> to be interesting, so they decided to contact you! The post can be found here: ' + window.location;"><span class="glyphicon glyphicon-send"></span> Contact Post Owner</button>
+				<button class="btn btn-default " href="#" onclick="javascript:window.location.href='mailto:<%=email%>?subject=SLUbay Message about <%=post.title%> from <%=username%>&body=Dear <%=post.user%>, %0D%0A %0D%0A <%=username%> (a fellow SLUbay user) found your post <%=post.title%> to be interesting, so they decided to contact you! The post can be found here: ' + window.location;"><span class="glyphicon glyphicon-envelope"></span> Contact Post Owner</button>
 
 				<!-- Edit and Delete Buttons  -->
 				<%if (editDelete) {%>
 
 				<button type="button" class="btn btn-default btn-lg btn-block dropdown-toggle" data-toggle="dropdown">
-				Post Options <span class="caret"></span>
+				<span class="glyphicon glyphicon-wrench"></span> Post Options <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="/home/<%= categoryid %>/<%= postid %>/edit">Edit Post</a></li>

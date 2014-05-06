@@ -8,7 +8,7 @@
 </div>
 <div class="container">
 	<div class="col-xs-12 col-sm-4">
-		<h4>Categories</h4>
+		<h4>Categories <span class="glyphicon glyphicon-filter"></h4>
 		<div class="list-group">
 			<% categories.forEach(function(item) { %>
 			<a href="/home/<%= item._id %>" class="list-group-item">
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-4">
-		<h4>Recent Posts</h4>
+		<h4>Recent Posts <span class="glyphicon glyphicon-calendar"></h4>
 		<div class="list-group">
 			<% recentPosts.forEach(function(item) { %>
 			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-4">
-		<h4>Hot Posts</h4>
+		<h4>Hot Posts <span class="text-danger glyphicon glyphicon-fire"></span></h4>
 		<div class="list-group">
 			<% hotPosts.forEach(function(item) { %>
 			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
