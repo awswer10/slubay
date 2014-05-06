@@ -67,7 +67,7 @@ module.exports = function(request, response) {
 			var hpLoopCount = hotPo.length;
 
 			if (hpLoopCount === 0) {
-				rePo = [];
+				hotPosts = [];
 				finished();
 			} else {
 				hotPo.forEach(function(post) {

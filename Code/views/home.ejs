@@ -2,48 +2,75 @@
 <% include chunks/nav %>
 
 <div class="container">
-	<ol class="breadcrumb">
-	  <li class="active">Home</li>
-	</ol>
+    <ol class="breadcrumb">
+        <li class="active">Home</li>
+    </ol>
 </div>
-<div class="container">
-	<div class="col-xs-12 col-sm-4">
-		<h4>Categories <span class="glyphicon glyphicon-filter"></h4>
-		<div class="list-group">
-			<% categories.forEach(function(item) { %>
-			<a href="/home/<%= item._id %>" class="list-group-item">
-				<span class="badge"><%= item.count %></span>
-				<%= item.name %>
-			</a>
-			<% }); %>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-4">
-		<h4>Recent Posts <span class="glyphicon glyphicon-calendar"></h4>
-		<div class="list-group">
-			<% recentPosts.forEach(function(item) { %>
-			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
-				<span class="badge"><%= item.date %></span>
-				<%= item.title %>
-			</a>
-			<% }); %>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-4">
-		<h4>Hot Posts <span class="text-danger glyphicon glyphicon-fire"></span></h4>
-		<div class="list-group">
-			<% hotPosts.forEach(function(item) { %>
-			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
-				<span class="badge"><%= item.views %> Views</span>
-				<%= item.title %>
-			</a>
-			<% }); %>
-		</div>
-	</div>
-</div>
+
 <% if (error) { %>
-    <div class="col-xs-12">
-        <div class="alert alert-danger"><%= error %></div>
-    </div>
+<div class="container">
+    <div class="alert alert-danger"><%= error %></div>
+</div>
 <% } %>
+
+<div class="container">
+	
+    <div class="col-xs-12 col-sm-4">
+        <h4>Categories <span class="glyphicon glyphicon-filter"></h4>
+        <div class="list-group">
+            <%var catCount = 0;%>
+            <% categories.forEach(function(item) { %>
+            <a href="/home/<%= item._id %>" class="list-group-item">
+	            <span class="badge"><%= item.count %></span>
+	            <%= item.name %>
+	            <% catCount++; %>
+            </a>
+            <% }); %>
+            <%if (catCount === 0) {%>
+            <a class="list-group-item">
+            Nothing to see here!
+            </a>
+            <%}%>
+        </div>
+    </div>
+	
+    <div class="col-xs-12 col-sm-4">
+        <h4>Recent Posts <span class="glyphicon glyphicon-calendar"></h4>
+        <div class="list-group">
+            <%var rpCount = 0;%>
+            <% recentPosts.forEach(function(item) { %>
+            <a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
+	            <span class="badge"><%= item.date %></span>
+	            <%= item.title %>
+	            <% rpCount++; %>
+            </a>
+            <% }); %>
+            <%if (rpCount === 0) {%>
+            <a class="list-group-item">
+            Nothing to see here!
+            </a>
+            <%}%>
+        </div>
+    </div>
+	
+    <div class="col-xs-12 col-sm-4">
+        <h4>Hot Posts <span class="text-danger glyphicon glyphicon-fire"></span></h4>
+        <div class="list-group">
+            <%var hpCount = 0;%>
+            <% hotPosts.forEach(function(item) { %>
+            <a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
+	            <span class="badge"><%= item.views %> Views</span>
+	            <%= item.title %>
+	            <% hpCount++; %>
+            </a>
+            <% }); %>
+            <%if (hpCount === 0) {%>
+            <a class="list-group-item">
+            Nothing to see here!
+            </a>
+            <%}%>
+        </div>
+    </div>
+	
+</div>
 <% include chunks/foot %>
