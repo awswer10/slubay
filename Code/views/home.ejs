@@ -23,6 +23,7 @@
 		<div class="list-group">
 			<% recentPosts.forEach(function(item) { %>
 			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
+				<span class="badge"><%= item.date %></span>
 				<%= item.title %>
 			</a>
 			<% }); %>
