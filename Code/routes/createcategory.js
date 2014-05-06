@@ -12,7 +12,7 @@ module.exports = function(request,response) {
     categories.create(categoryname, function(success) {
         
         if (success) {
-            response.redirect("/home/manage/admin/category");
+            response.redirect("/home/manage/admin");
         }
         
         else {

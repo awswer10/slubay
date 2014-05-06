@@ -12,7 +12,7 @@ module.exports = function(request,response) {
     users.ban(banname, function(success) {
         
         if (success) {
-            response.redirect("/home/manage/admin/user");
+            response.redirect("/home/manage/admin");
         }
         
         else {

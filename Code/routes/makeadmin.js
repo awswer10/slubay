@@ -16,7 +16,7 @@ module.exports = function(request,response) {
             users.makeAdmin(makeadminname, function(success1) {
                
                 if (success1) {
-                    response.redirect("/home/manage/admin/user");
+                    response.redirect("/home/manage/admin");
                 }
                 
                 else {

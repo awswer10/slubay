@@ -15,7 +15,7 @@ module.exports = function(request,response) {
         comments.deleteUser(deletename, function(){});
         users.delete(deletename, function(success) {
             if (success) {
-                response.redirect("/home/manage/admin/user");
+                response.redirect("/home/manage/admin");
             }
             else {
                 request.session.error = "User does not exist.";

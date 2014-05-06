@@ -1,15 +1,110 @@
 <% include chunks/head %>
+<% include chunks/nav %>
 
-<p>Admin manager  page for <%= username %>.</p>
+<div class="container">
+	<ol class="breadcrumb">
+	  <li><a href="/home">Home</a></li>
+	  <li class="active">Administrator Page</li>
+	</ol>
+</div>
+<div class="container">
+	<div class="col-xs-12 col-sm-6">
+		
+		<h4>User Management <span class="glyphicon glyphicon-user"></h4>
+		
+		<!-- Ban User -->
+		<form id="banuser" method="post" action="/home/manage/admin/user/ban" role="form">	
+			<div class="input-group">
+				<input type="text" class="form-control" name="banname" id="login_name" placeholder="Username" required>
+				<span class="input-group-btn">
+					<button id="banuser" type="submit" class="btn btn-warning" type="button">Ban User</button>
+				</span>
+				
+			</div>
+			<span class="help-block">Enter the exact username of the user you would like to ban.</span>
+		</form>
+		
+		<!-- Unban User -->
+		<form id="unbanuser" method="post" action="/home/manage/admin/user/unban" role="form">
+			<div class="input-group">
+				<input type="text" class="form-control" name="unbanname" id="login_name" placeholder="Username" required>
+				<span class="input-group-btn">
+					<button id="unbanuser" type="submit" class="btn btn-success" type="button">Unban User</button>
+				</span>
+			</div>
+			<span class="help-block">Enter the exact username of the user you would like to unban.</span>
+		</form>
+		
+		<!-- Delete User -->
+		<form id="deleteuser" method="post" action="/home/manage/admin/user/delete" role="form">
+			<div class="input-group">
+				<input type="text" class="form-control" name="deletename" id="delete_name" placeholder="Username" required>
+				<span class="input-group-btn">
+					<button id="deleteuser" type="submit" class="btn btn-danger" type="button">Delete User</button>
+				</span>
+			</div>
+			<span class="help-block">Enter the exact username of the user you would like to delete.</span>
+		</form>
 
-<!--<nav id = "adminmanagenavigation">
-    <ul>
-        <li><a href="/home">Home</a></li>
-        <li ><a id="usermanager" href="/home/manage/admin/user">User Manager</a></li>
-        <li ><a id="categorymanager" href="/home/manage/admin/category">Category Manager</a></li>
-        <li ><a id="logout" href="/logout">Logout</a></li>
-    </ul>
-</nav>-->
+		<!-- Promote User to Administrator-->
+		<form id="makeadmin" method="post" action="/home/manage/admin/user/makeadmin" role="form">
+			<div class="input-group">
+				<input type="text" class="form-control" name="makeadminname" id="makeadmin_name" placeholder="Username" required>
+				<span class="input-group-btn">
+					<button id="makeadmin" type="submit" class="btn btn-primary" type="button">Promote to Admin</button>
+				</span>
+			</div>
+			<span class="help-block">Enter the exact username of the user you would like to promote.</span>
+		</form>
+		
+		<!-- Demote user from Administrator-->
+		<form id="unmakeadmin" method="post" action="/home/manage/admin/user/unmakeadmin" role="form">
+			<div class="input-group">
+				<input type="text" class="form-control" name="unmakeadminname" id="unmakeadminname_name" placeholder="Username" required>
+				<span class="input-group-btn">
+					<button id="unmakeadminname" type="submit" class="btn btn-primary" type="button">Demote User</button>
+				</span>
+			</div>
+			<span class="help-block">Enter the exact username of the user you would like to demote.</span>
+		</form>
+	</div>
+	
+	<div class="col-xs-12 col-sm-6">
+		
+		<h4>Category Management <span class="glyphicon glyphicon-filter"></h4>
+		
+		<!-- Add Category -->
+		<form id="createcategory" method="post" action="/home/manage/admin/category/create" role="form">	
+			<div class="input-group">
+				<input type="text" class="form-control" name="createcategoryname" id="category_name" placeholder="Category title" required>
+				<span class="input-group-btn">
+					<button id="createcategory" type="submit" class="btn btn-success" type="button">Create Category</button>
+				</span>
+				
+			</div>
+			<span class="help-block">Enter the name of the category you would like to create.</span>
+		</form>
+		
+		
+		<form class="form-inline" id="deletecategory" method="post" action="/home/manage/admin/category/delete" role="form">
+	
+		    <select class="form-control" name="deletecategoryname">
+		        <% categories.forEach(function(item) { %>
+		            <option class="list-group-item">
+		                <%= item.name %>
+		            </option>
+		        <% }); %>
+		    </select>
+  
+		    <button id="deletecategory" type="submit" class="btn btn-danger">Delete Category</button>
+			<span class="help-block">Select the category you would like to remove.</span>
+  
+		</form>
+		
+	</div>
+	
+	
+</div>
 
-<% include chunks/adminnav %>
+
 <% include chunks/foot %>

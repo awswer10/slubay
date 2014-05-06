@@ -16,7 +16,7 @@ module.exports = function(request,response) {
             posts.deleteCategory(categoryname, function() {
                 
             });
-            response.redirect("/home/manage/admin/category");
+            response.redirect("/home/manage/admin");
         }
         
         else {

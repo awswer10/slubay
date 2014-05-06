@@ -23,11 +23,14 @@ module.exports.create = function(name,callback) {
 
 // retrieve all categories
 module.exports.retrieveAll = function(callback) {
-    db.categories.find({}, function(error, allItems) {
-        if (error) throw error;
-        callback(allItems);
-    });
+	db.categories.find({}).sort({
+		name: 1
+	}, function(error, allItems) {
+		if (error) throw error;
+		callback(allItems);
+	});
 };
+
 
 // Retrieve one category
 module.exports.retrieve = function(itemid, callback) {

@@ -27,7 +27,7 @@ module.exports.create = function(user,title,category,description,views,callback)
         
 };
 
-//Edit tittle
+//Edit title
 module.exports.editTitle = function(itemid, newtitle, callback) {
      db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{title:newtitle}}, function(error) {
         if (error) throw error;
@@ -89,7 +89,7 @@ module.exports.retrieveCategory = function(categoryname,callback) {
     //           callback(posts);
     //    });
     //});
-    db.posts.find({category:categoryname}, function(error,posts) {
+    db.posts.find({category:categoryname}).sort({date:-1}, function(error,posts) {
         if (error) throw error;
         callback(posts);
     });
@@ -104,7 +104,7 @@ module.exports.retrieveRecent = function(callback) {
 	});
 };
 
-//Retrieve post given category
+//Retrieve posts with most views
 module.exports.retrieveHotPosts = function(callback) {
 
 	db.posts.find().sort({views: -1}).limit(10, function(error, posts) {
@@ -159,7 +159,7 @@ module.exports.titleExist = function(title, callback) {
 
 //Retrieve all posts of one user
 module.exports.retrieveUser = function(user, callback) {
-    db.posts.find({user:user}, function(error,posts) {
+    db.posts.find({user:user}).sort({date:-1}, function(error,posts) {
         if (error) throw error;
        
         if (!user) {

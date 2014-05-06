@@ -1,5 +1,6 @@
 // Admin Manager page:  Displays features only visible to admins
 var users = require('../models/users');
+var categories = require('../models/categories');
 
 module.exports = function(request, response) {
     
@@ -8,7 +9,9 @@ module.exports = function(request, response) {
    // Renders admin manager if admin, prints error otherwise
    users.admin(username, function(success) {
       if (success) {
-         response.render('adminmanager', {username:username});
+	      categories.retrieveAll(function(categories) {
+	         response.render('adminmanager', {username:username,categories:categories});
+	      });
       }
       
       else {
