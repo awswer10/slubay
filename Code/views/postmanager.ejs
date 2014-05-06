@@ -2,8 +2,14 @@
 <% include chunks/nav %>
 
 <div class="container">
+	<!-- Breadcrumb bar -->
+	<ol class="breadcrumb">
+		<li><a href="/home">Home</a></li>
+		<li class="active">Post Manager</li>
+	</ol>
+	
 <div class="col-xs-12 col-sm-6">
-        <h4>All Posts</h4>
+        <h4>All Posts by <%=username%></h4>
         <div class="list-group">
             <% posts.forEach(function(item) { %>
             <a href="/home/<%= item.categoryid %>/<%= item._id %>" class="list-group-item">
