@@ -3,6 +3,7 @@
 var posts = require('../models/posts');
 var comments = require('../models/comments');
 var users = require('../models/users');
+var moment = require('moment');
 
 module.exports = function(request, response) {
 	var url = request.url;
@@ -14,16 +15,13 @@ module.exports = function(request, response) {
 	var username = request.session.username;
 	var editDelete;
 
-        // If user is logged in, renders individual post with
-        // updated information (view count), otherwise redirects
-        // to login page.
+	// If user is logged in, renders individual post with
+	// updated information (view count), otherwise redirects
+	// to login page.
 	if (username) {
-                  try {
-                          
-                           
-                           
-                        // Increases view count and retrieves post
-                        posts.increaseViews(postid,function(){});
+		try {
+			// Increases view count and retrieves post
+			posts.increaseViews(postid, function() {});
 			posts.retrieve(postid, function(post) {
 				users.admin(username, function(success) {
 
@@ -45,8 +43,15 @@ module.exports = function(request, response) {
 							}
 						});
 					}
-
+					
+					// Retrieve Comments
 					comments.retrievePostid(postid, function(comments) {
+						
+						comments.forEach(function(comment) {
+								comment.date = moment(comment.date).fromNow();
+							});
+						
+						// Retrieve Email for user
 						users.retrieveEmail(post.user, function(email) {
 							response.render('post', {
 								username: username,

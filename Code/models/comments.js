@@ -8,7 +8,7 @@ var db = mongojs('slubay', ['comments']);
 // Create a new comment
 module.exports.create = function(postid,textfield,user,date,callback) {
         
-    db.comments.insert({postid:mongojs.ObjectId(postid),textfield:textfield,user:user,date:date}, function(error, comment) {
+    db.comments.insert({postid:mongojs.ObjectId(postid),textfield:textfield,user:user,date:new Date()}, function(error, comment) {
             if (error) throw error;
             
             callback(comment);
@@ -53,10 +53,10 @@ module.exports.retrieveUser = function(user, callback) {
     });
 };
 
-// Retrieve one comment by id
+// Retrieve comments by post id
 module.exports.retrievePostid = function(postid, callback) {
     
-    db.comments.find({postid:mongojs.ObjectId(postid)}, function(error,comments) {
+    db.comments.find({postid:mongojs.ObjectId(postid)}).sort({date:-1}, function(error,comments) {
         if (error) throw error;
        
         if (!comments) {
