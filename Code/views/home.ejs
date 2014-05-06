@@ -7,7 +7,7 @@
 	</ol>
 </div>
 <div class="container">
-	<div class="col-xs-12 col-sm-6">
+	<div class="col-xs-12 col-sm-4">
 		<h4>Categories</h4>
 		<div class="list-group">
 			<% categories.forEach(function(item) { %>
@@ -18,12 +18,23 @@
 			<% }); %>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-6">
+	<div class="col-xs-12 col-sm-4">
 		<h4>Recent Posts</h4>
 		<div class="list-group">
 			<% recentPosts.forEach(function(item) { %>
 			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
 				<span class="badge"><%= item.date %></span>
+				<%= item.title %>
+			</a>
+			<% }); %>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-4">
+		<h4>Hot Posts</h4>
+		<div class="list-group">
+			<% hotPosts.forEach(function(item) { %>
+			<a href="/home/<%= item.category %>/<%= item._id %>" class="list-group-item">
+				<span class="badge"><%= item.views %> Views</span>
 				<%= item.title %>
 			</a>
 			<% }); %>

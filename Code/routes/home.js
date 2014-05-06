@@ -15,7 +15,9 @@ module.exports = function(request, response) {
 
 		var cats = null;
 		var rePo = null;
-
+		var hotPosts = null;
+		
+		// Retreives all of the categories from the database
 		categories.retrieveAll(function(catArray) {
 			var catLoopCount = catArray.length;
 
@@ -27,7 +29,6 @@ module.exports = function(request, response) {
 					posts.countCategory(category.name, function(count) {
 						category.count = count;
 						catLoopCount--;
-						console.log(catLoopCount);
 						if (catLoopCount === 0) {
 							cats = catArray;
 							finished();
@@ -37,8 +38,7 @@ module.exports = function(request, response) {
 			}
 		});
 
-		// function that returns the most recent posts added
-		// to the database
+		// Retreives the most recent posts from the database
 		posts.retrieveRecent(function(recentPosts) {
 
 			var rpLoopCount = recentPosts.length;
@@ -61,26 +61,41 @@ module.exports = function(request, response) {
 			}
 		});
 
-		// Once categories and recent posts are retrieved,
-		// home page is rendered.
+		// Retreives the posts with the most views from the database
+		posts.retrieveHotPosts(function(hotPo) {
 
+			var hpLoopCount = hotPo.length;
+
+			if (hpLoopCount === 0) {
+				rePo = [];
+				finished();
+			} else {
+				hotPo.forEach(function(post) {
+					categories.retrieveID(post.category, function(catID) {
+						post.category = catID;
+						hpLoopCount--;
+						if (hpLoopCount === 0) {
+							hotPosts = hotPo;
+							finished();
+						}
+					});
+				});
+			}
+		});
+
+		// Once all of the DB callbacks are returned, this will allow the page to render.
 		function finished() {
-			if (cats !== null && rePo !== null) {
-				console.log("render");
+			if (cats !== null && rePo !== null && hotPosts !== null) {
 				response.render('home', {
 					username: username,
 					categories: cats,
 					recentPosts: rePo,
+					hotPosts: hotPosts,
 					error: request.session.error1
 				});
 				delete request.session.error1;
 			}
-			//else {
-			//    response.render('home', {username:username,categories:cats});
-			//}
 		}
-
-
 	} else {
 		response.render('login', {
 			error: request.session.error

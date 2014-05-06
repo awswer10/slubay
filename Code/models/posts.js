@@ -98,12 +98,16 @@ module.exports.retrieveCategory = function(categoryname,callback) {
 //Retrieve post given category
 module.exports.retrieveRecent = function(callback) {
 
-	db.posts.find({
-		$query: {},
-		$orderby: {
-			date: -1
-		}
-	}, function(error, posts) {
+	db.posts.find().sort({date: -1}).limit(10, function(error, posts) {
+		if (error) throw error;
+		callback(posts);
+	});
+};
+
+//Retrieve post given category
+module.exports.retrieveHotPosts = function(callback) {
+
+	db.posts.find().sort({views: -1}).limit(10, function(error, posts) {
 		if (error) throw error;
 		callback(posts);
 	});
