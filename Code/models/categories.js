@@ -6,8 +6,11 @@ var bcrypt = require('bcrypt');
 var db = mongojs('slubay', ['categories']);
 
 // Create a new category
+//Inp: category name, callback
+//Out: If item is created, returned category object else return false
 module.exports.create = function(name,callback) {
         
+    //search the database and see if the category has already exist, otherwise create it.     
     db.categories.findAndModify({
         query: {name:name},
         update: {$setOnInsert:{name:name}},
@@ -21,7 +24,9 @@ module.exports.create = function(name,callback) {
         });
 };
 
-// retrieve all categories
+// retrieve all categories, sort them by ascending order
+//Inp: callback
+//Out: list of all item in the database in acensding order
 module.exports.retrieveAll = function(callback) {
 	db.categories.find({}).sort({
 		name: 1
@@ -33,6 +38,9 @@ module.exports.retrieveAll = function(callback) {
 
 
 // Retrieve one category
+//Inp: the item ID, callback
+//Out:return the item if it does exist
+//      return false if item doesn't exist
 module.exports.retrieve = function(itemid, callback) {
     
     db.categories.findOne({_id:mongojs.ObjectId(itemid)}, function(error,category) {
@@ -48,6 +56,8 @@ module.exports.retrieve = function(itemid, callback) {
 };
 
 // Retrieve one category name
+//Inp:category id, callback
+//Out: item's name if it does exist, otherwise return false
 module.exports.retrieveName = function(itemid, callback) {
     
     db.categories.findOne({_id:mongojs.ObjectId(itemid)}, function(error,category) {
@@ -64,6 +74,8 @@ module.exports.retrieveName = function(itemid, callback) {
 
 
 // Retrieve one category ID
+//Inp:category name, callback
+//Out:category if it does exist, return false if it doesn't exist.
 module.exports.retrieveID = function(name, callback) {
     
     db.categories.findOne({name:name}, function(error,category) {
@@ -79,6 +91,8 @@ module.exports.retrieveID = function(name, callback) {
 };
 
 //count number of categories in database
+//Inp:callback
+//Out: number of category in the database
 module.exports.count=function(callback){
   db.categories.count(function(error,count){
         if (error) throw error;
@@ -87,6 +101,8 @@ module.exports.count=function(callback){
 };
 
 //delete a category
+//Inp:category name, callback
+//Out: true if successful
 module.exports.delete=function(name,callback){
      db.categories.remove({name:name}, function(error) {
         if (error) throw error;
@@ -98,14 +114,18 @@ module.exports.delete=function(name,callback){
 
 
 // Delete all categories
+//Inp:callback
+//Out: true if successful
 module.exports.deleteAll = function(callback) {
     db.categories.remove({}, function(error) {
         if (error) throw error;
-        callback();
+        callback(true);
     });
 };
 
 // Close the connection
+//Inp:callback
+//Out:none
 module.exports.close = function(callback) {
     db.close(function(error) {
         if (error) throw error;

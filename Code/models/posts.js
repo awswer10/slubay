@@ -8,6 +8,8 @@ var categories = require('../models/categories');
 //var db = mongojs('slubay', ['categories']);
 
 // Create a new post
+//Inp:user, title, category, description, views, callback
+//Out: a post object if successful
 module.exports.create = function(user,title,category,description,views,callback) {
         
         categories.retrieveID(category,function(categoryid) {
@@ -28,6 +30,8 @@ module.exports.create = function(user,title,category,description,views,callback)
 };
 
 //Edit title
+//Inp: postid, new title, callback
+//Out: true if successful
 module.exports.editTitle = function(itemid, newtitle, callback) {
      db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{title:newtitle}}, function(error) {
         if (error) throw error;
@@ -36,6 +40,8 @@ module.exports.editTitle = function(itemid, newtitle, callback) {
 }
 
 //Edit category
+//Inp: postid new category, callback
+//Out: true if successful
 module.exports.editCategory = function(itemid, newCategory, callback) {
     categories.retrieveID(newCategory,function(categoryid) {
         db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{category:newCategory,categoryid:categoryid}}, function(error) {
@@ -46,6 +52,8 @@ module.exports.editCategory = function(itemid, newCategory, callback) {
 }
 
 //Edit description
+//Inp: postid, new Description, callback
+//Out: true if successful
 module.exports.editDescription = function(itemid, newDescription, callback) {
      db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{description:newDescription}}, function(error) {
         if (error) throw error;
@@ -54,6 +62,8 @@ module.exports.editDescription = function(itemid, newDescription, callback) {
 }
 
 //Edit date
+//Inp: postid, new Date , callback
+//Out: true if successful
 module.exports.editDate = function(itemid, newDate, callback) {
      db.posts.update({_id:mongojs.ObjectId(itemid)}, {$set:{date:newDate}}, function(error) {
         if (error) throw error;
@@ -63,6 +73,8 @@ module.exports.editDate = function(itemid, newDate, callback) {
 
 
 //increase views
+//Inp: postid, callback
+//Out: true if successful
 module.exports.increaseViews = function(itemid,callback) {
      db.posts.update({_id:mongojs.ObjectId(itemid)}, {$inc:{views: 1}}, function(error) {
         if (error) throw error;
@@ -71,15 +83,24 @@ module.exports.increaseViews = function(itemid,callback) {
 }
 
 //Retrieve all post
+//Inp: callback
+//Out: false if not exist, a list of posts if exist
 module.exports.retrieveAll = function(callback) {
     
     db.posts.find({}, function(error,posts) {
         if (error) throw error;
-        callback(posts);
+        if (!posts) {
+            callback(false);
+        }
+        else{
+            callback(posts);
+        }
     });
 };
 
 //Retrieve post given category
+//Inp: category name, callback
+//Out: False if there is no posts with in that category. A list of posts if it does exist.
 module.exports.retrieveCategory = function(categoryname,callback) {
     
     //db.categories.find({_id:mongojs.ObjectId(itemid)}, function(error,category) {
@@ -91,30 +112,52 @@ module.exports.retrieveCategory = function(categoryname,callback) {
     //});
     db.posts.find({category:categoryname}).sort({date:-1}, function(error,posts) {
         if (error) throw error;
-        callback(posts);
+        if (!posts) {
+            callback(false);
+        }
+        else{
+            callback(posts);
+        }
     });
 };
 
-//Retrieve post given category
+//Retrieve up to 10 recent posts in descending order by date
+//Inp: callback
+//Out: a list of posts(up to 10) if it does exist. Return false otherwise.
 module.exports.retrieveRecent = function(callback) {
 
 	db.posts.find().sort({date: -1}).limit(10, function(error, posts) {
 		if (error) throw error;
-		callback(posts);
+		if (!posts) {
+                    callback(false);
+                }
+                else{
+                    callback(posts);
+                }
 	});
 };
 
-//Retrieve posts with most views
+//Retrieve up to 10 posts with most views by descending order
+//Inp: callback
+//Out: a list of posts(up to 10) if it does exist. Return false otherwise.
 module.exports.retrieveHotPosts = function(callback) {
 
 	db.posts.find().sort({views: -1}).limit(10, function(error, posts) {
 		if (error) throw error;
-		callback(posts);
+		if (!posts) {
+                    callback(false);
+                }
+                else{
+                    callback(posts);
+                }
 	});
 };
 
 
 //Retrieve one post
+//Inp: postid
+//Out: post object if it does exist, false if it doesn't
+
 module.exports.retrieve = function(itemid, callback) {
     db.posts.findOne({_id:mongojs.ObjectId(itemid)}, function(error,post) {
         if (error) throw error;
@@ -129,6 +172,8 @@ module.exports.retrieve = function(itemid, callback) {
 };
 
 //Retrieve post ID given title
+//Inp: tilte, callback
+//Out: post object if it does exist, false otherwise.
 module.exports.retrieveTitle = function(title, callback) {
     db.posts.findOne({title:title}, function(error,post) {
         if (error) throw error;
