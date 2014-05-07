@@ -17,7 +17,7 @@ module.exports = function(request,response) {
         
         else {
             request.session.error = "User does not exist.";
-            response.redirect("/home/manage/admin/user");
+            response.redirect("/home/manage/admin");
         }
         
     });

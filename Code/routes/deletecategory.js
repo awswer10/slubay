@@ -21,7 +21,7 @@ module.exports = function(request,response) {
         
         else {
             request.session.error = "category doesn't exist.";
-            response.redirect("/home/manage/admin/category");
+            response.redirect("/home/manage/admin");
         }
         
     });
