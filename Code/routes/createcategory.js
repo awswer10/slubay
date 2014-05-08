@@ -9,16 +9,15 @@ module.exports = function(request,response) {
     
     // Creates new category in the categories database and redirects
     // user to category manager page.
-    categories.create(categoryname, function(success) {
-        
+    categories.titleExist(categoryname, function(error, success) {
         if (success) {
+            categories.create(categoryname,function(){
+                response.redirect("/home/manage/admin");
+            });
+        } else {
+            request.session.error = "Category already exists.";
             response.redirect("/home/manage/admin");
         }
-        
-        else {
-            request.session.error = "category already exists.";
-            response.redirect("/home/manage/admin");
-        }
-        
     });
+
 };

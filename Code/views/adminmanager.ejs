@@ -7,12 +7,13 @@
 	  <li class="active">Administrator Page</li>
 	</ol>
 </div>
+<% if (error) { %>
+	<div class="container">
+		<div class="alert alert-danger" id="error"><%= error %></div>
+	</div>
+<% } %>
 <div class="container">
-	<% if (error) { %>
-		<div class="col-xs-12">
-			<div class="alert alert-danger" id="error"><%= error %></div>
-		</div>
-	<% } %>
+	
 	<div class="col-xs-12 col-sm-6">
 		
 		<h4>User Management <span class="glyphicon glyphicon-user"></h4>

@@ -90,6 +90,22 @@ module.exports.retrieveID = function(name, callback) {
     });
 };
 
+//see if title has already exist
+//Inp:title, callback
+//Out: boolean
+module.exports.titleExist = function(name, callback) {
+    db.categories.findOne({name:name}, function(error,category) {
+        if (error) throw error;
+       
+        if (!category) {
+            callback(false);
+        }
+        else{
+            callback(true);
+        }
+    });
+};
+
 //count number of categories in database
 //Inp:callback
 //Out: number of category in the database
