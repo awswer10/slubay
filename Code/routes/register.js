@@ -31,7 +31,6 @@ module.exports = function(request,response) {
 			
 			//if there is no users in the database before create,
 			//then the 1st user created is admin
-			console.log(count);
 			if (count===0) {
 			    users.makeAdmin(name, function(){});
 			}

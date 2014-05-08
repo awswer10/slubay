@@ -67,24 +67,39 @@ exports['log in (success)'] = function(test) {
 }
 
 // Create new post (success)
-exports['create new post1 (success)'] = function(test) {
-    test.expect(2);
+exports['create new post (success)'] = function(test) {
+    test.expect(1);
     
     browser.visit('http://localhost:8080/home', function() {
-        console.log('made it here');
         test.ok(browser.query('#createnewpost'));
-        console.log('made it here1');
         browser.pressButton('#createnewpost', function() {
-            console.log('made it here2');
             browser.
             fill('#title', 'title').
-            fill('#category','Skateboards').
+            selectOption('#category','Skateboards').
             fill('#description', 'description').
             pressButton('#submitnewpost', function() {
-                console.log('made it here3');
+                    test.done();
+            });
+        });
+        
+    });
+}
+
+// Create new post (failure)
+exports['create new post (failure)'] = function(test) {
+    test.expect(3);
+    
+    browser.visit('http://localhost:8080/home', function() {
+        test.ok(browser.query('#createnewpost'));
+        browser.pressButton('#createnewpost', function() {
+            browser.
+            fill('#title', 'title').
+            selectOption('#category','Skateboards').
+            fill('#description', 'description').
+            pressButton('#submitnewpost', function() {
+                test.ok(browser.query('#error'));
                 test.ok(browser.query('#logout'));
                 browser.clickLink('#logout', function() {
-                    console.log('made it here4');
                     test.done();
                 });
             });
@@ -92,37 +107,6 @@ exports['create new post1 (success)'] = function(test) {
         
     });
 }
-
-// Create new post (success)
-//exports['create new post (success)'] = function(test) {
-//    test.expect(2);
-//    
-//    browser.visit('http://localhost:8080/', function() {
-//        test.ok(browser.query('#register'));
-//        
-//        browser.
-//            fill('#login_name', 'username').
-//            fill('#login_password', 'password').
-//            pressButton('#login_submit', function() {
-//                console.log('made it here');
-//                browser.clickLink('#createnewpost', function() {
-//                    console.log('made it here2');
-//                    browser.
-//                        fill('#title', 'title').
-//                        select('#category','books').
-//                        fill('#description', 'description').
-//                        pressButton('#submitnewpost', function() {
-//                            console.log('made it here 3');
-//                            test.ok(browser.query('#logout'));
-//                            browser.clickLink('#logout', function() {
-//                                test.done();
-//                            });
-//                        });
-//
-//                });
-//            });
-//    });
-//}
 
 // Log in (failure - bad username)
 exports['log in (failure - bad username)'] = function(test) {
