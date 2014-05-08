@@ -11,14 +11,14 @@
 			<label for="category">Category</label>
 		    <select name="category" class="form-control" name="category">
 				<% categories.forEach(function(item) { %>
-			    <option class="list-group-item"><%= item.name %></option>
+			    <option id="category" class="list-group-item"><%= item.name %></option>
 				<% }); %>
 	   	 	</select>
 		</div>
     
 	    <div class="form-group">
 			<label for="description">Description</label>
-	        <textarea class="form-control" name="description" rows="4" placeholder="Description" required></textarea>
+	        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Description" required></textarea>
 	    </div>            
 	    <button id="submitnewpost" type="submit" class="btn btn-primary">Submit Post</button>
 	</form>
