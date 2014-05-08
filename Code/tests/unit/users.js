@@ -11,7 +11,7 @@ exports['setup'] = function(test) {
 // Successful registration
 exports['register a user'] = function(test) {
     test.expect(1);
-    users.create('username','realname', 'password','email', 'year','major', function(success) {
+    users.create('username','realname', 'password','email', function(success) {
         test.ok(success);
         test.done();
     });
@@ -20,7 +20,7 @@ exports['register a user'] = function(test) {
 // Failed registration
 exports['register a duplicate user'] = function(test) {
     test.expect(1);
-    users.create('username', 'realname', 'password','email', 'year','major', function(success) {
+    users.create('username', 'realname', 'password','email', function(success) {
         test.ok(!success);
         test.done();
     });
@@ -70,41 +70,8 @@ exports['unban user'] = function(test) {
     });
 };
 
-// Successful edit email
-exports['edit email'] = function(test) {
-    test.expect(1);
-    users.editEmail('username','newemail', function(success) {
-        test.ok(success);
-        test.done();
-    });
-};
-// Successful edit year
-exports['edit year'] = function(test) {
-    test.expect(1);
-    users.editYear('username','newyear', function(success) {
-        test.ok(success);
-        test.done();
-    });
-};
-// Successful edit major
-exports['edit major'] = function(test) {
-    test.expect(1);
-    users.editMajor('username','newmajor', function(success) {
-        test.ok(success);
-        test.done();
-    });
-};// Successful edit realname
-exports['edit realname'] = function(test) {
-    test.expect(1);
-    users.editRealname('username','newrealname', function(success) {
-        test.ok(success);
-        test.done();
-    });
-};
-
-
 // Successful make user admin
-exports['make admin'] = function(test) {
+exports['make Admin'] = function(test) {
     test.expect(1);
     users.makeAdmin('username', function(success) {
         test.ok(success);
@@ -112,23 +79,43 @@ exports['make admin'] = function(test) {
     });
 };
 
-
 // Successful unmake user admin
-exports['unmake admin'] = function(test) {
+exports['unmake Admin'] = function(test) {
     test.expect(1);
     users.unmakeAdmin('username', function(success) {
         test.ok(success);
         test.done();
     });
 };
-// Successful edit password
-exports['edit password '] = function(test) {
+// Successful edit email
+exports['edit email'] = function(test) {
     test.expect(1);
-    users.editPassword('username', 'password','newpassword', function(success) {
-        test.ok(success);
-        test.done();
+    users.editEmail('username','newemail', function(success) {
+        users.retrieve('username', function(user){
+            var success= (user.email ==='newemail');
+            test.ok (success);
+            test.done();
+        });
+        
     });
 };
+
+
+
+
+
+// Successful edit password
+exports['edit password'] = function(test) {
+    test.expect(1);
+    users.editPassword('username','password', 'newpassword', function(success) {
+        users.login('username','newpassword', function(success){
+            test.ok (success);
+            test.done();
+        });
+        
+    });
+};
+
 
 // Unsuccessful edit password
 exports['edit password with wrong credential '] = function(test) {
