@@ -13,19 +13,20 @@
 	<div class="col-xs-12 col-sm-6">
 		<h4>Posts</h4>
 		<div class="list-group">
+			<% var postCount = 0;%>
 			<% posts.forEach(function(item) { %>
 			<a href="/home/<%= categoryid %>/<%= item._id %>" class="list-group-item">
 				<%= item.title %>
+				<% postCount++;%>
 			</a>
 			<% }); %>
+            <%if (postCount === 0) {%>
+            <a class="list-group-item">
+            Nothing to see here!
+            </a>
+            <%}%>
 		</div>
 	</div>
 </div>
-
-<!--<div>
-    <form id="createnewpost" method="post" action="/home/<%= categoryid %>/newpost" role="form">
-        <button id="createnewpost" type="submit" class="btn btn-primary">Create New Post</button>
-    </form>
-</div>-->
 
 <% include chunks/foot %>
