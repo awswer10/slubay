@@ -18,21 +18,34 @@ module.exports = function(request,response) {
     // If they are, new user is created and redirected to home page.
     // returns error if username is unavailable.
     else {
-	    users.create(name, realname, password, email, function(success) {
+	    //check to see if there is any user already in the database
+	    users.count(function(count){
+		
+		users.create(name, realname, password, email, function(success) {
+    
+		    if (success) {
+			request.session.username = name;
+			request.session.realname = realname;
+			request.session.password = password;
+			request.session.email = email;
+			
+			//if there is no users in the database before create,
+			//then the 1st user created is admin
+			console.log(count);
+			if (count===0) {
+			    users.makeAdmin(name, function(){});
+			}
+			response.redirect('/home');
+		    }
+	    
+		    else {
+			request.session.error = 'Username '+name+' is not available.';
+			response.redirect('/');
+		    }
+	    
+		});
+		
 
-	        if (success) {
-	            request.session.username = name;
-	            request.session.realname = realname;
-	            request.session.password = password;
-	            request.session.email = email;
-	            response.redirect('/home');
-	        }
-        
-	        else {
-	            request.session.error = 'Username '+name+' is not available.';
-	            response.redirect('/');
-	        }
-        
 	    });
 	}
 };

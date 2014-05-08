@@ -6,6 +6,8 @@ var bcrypt = require('bcrypt');
 var db = mongojs('slubay', ['users']);
 
 // Register a new user
+//Inp: name, realname, password, email, callback
+//Out: boolean whether the password and hash are equal
 module.exports.create = function(name,realname,password,email, callback) {
     
     bcrypt.hash(password, 10, function(error,hash) {
@@ -28,22 +30,10 @@ module.exports.create = function(name,realname,password,email, callback) {
     });
 };
 
-//ban a user
-//module.exports.ban=function(name,callback){
-//     db.users.update({name:name}, {$set:{ban:true}}, function(error) {
-//        if (error) throw error;
-//        callback(true);
-//    });
-//}
-//unban a user
-//module.exports.unban=function(name,callback){
-//     db.users.update({name:name}, {$set:{ban:false}}, function(error) {
-//        if (error) throw error;
-//        callback(true);
-//    });
-//}
 
 // Ban a user
+//Inp:name, callback
+//Out: true if success, false if doesn't
 module.exports.ban=function(name,callback){
      db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -64,6 +54,8 @@ module.exports.ban=function(name,callback){
 }
 
 // Unban a user
+//Inp:name, callback
+//Out: true if success, false if doesn't
 module.exports.unban=function(name,callback){
      db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -85,6 +77,8 @@ module.exports.unban=function(name,callback){
 
 
 //make user admin
+//Inp:name, callback
+//Out: true if success, false if doesn't
 module.exports.makeAdmin=function(name,callback){
     db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -105,6 +99,8 @@ module.exports.makeAdmin=function(name,callback){
 }
 
 //unmake user admin
+//Inp:name, callback
+//Out: true if success, false if doesn't
 module.exports.unmakeAdmin=function(name,callback){
     db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -125,6 +121,8 @@ module.exports.unmakeAdmin=function(name,callback){
 }
 
 //check to see if user is Admin
+//Inp:name, callback
+//Out: boolean
 module.exports.admin=function(name,callback){
      db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -145,6 +143,8 @@ module.exports.admin=function(name,callback){
 }
 
 //check to see if user is ban
+//Inp:name, callback
+//Out: boolean
 module.exports.checkBan=function(name,callback){
      db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -166,6 +166,8 @@ module.exports.checkBan=function(name,callback){
      
 
 //Edit email
+//Inp:name, new email, callback
+//Out: true 
 module.exports.editEmail = function(name, newemail, callback) {
      db.users.update({name:name}, {$set:{email:newemail}}, function(error) {
         if (error) throw error;
@@ -174,6 +176,8 @@ module.exports.editEmail = function(name, newemail, callback) {
 }
 
 //Edit realname
+//Inp:name, new realname , callback
+//Out: true
 module.exports.editRealname = function(name, newrealname, callback) {
      db.users.update({name:name}, {$set:{realname:newrealname}}, function(error) {
         if (error) throw error;
@@ -182,6 +186,8 @@ module.exports.editRealname = function(name, newrealname, callback) {
 }
 
 //Edit password
+//Inp:name, callback
+//Out: true if success, false if doesn't
 module.exports.editPassword = function(name, password, newpassword, callback) {
       db.users.findOne({name:name}, function(error, user) {
         if (error) throw error;
@@ -215,6 +221,8 @@ module.exports.editPassword = function(name, password, newpassword, callback) {
 
 
 // Verify login credentials
+//Inp:name, password, callback
+//Out: boolean
 module.exports.login = function(name, password, callback) {
     
     db.users.findOne({name:name}, function(error, user) {
@@ -235,15 +243,26 @@ module.exports.login = function(name, password, callback) {
 };
 
 //Retrieve all user
+//Inp:callback
+//Out: list of users
 module.exports.retrieveAll = function(callback) {
     
     db.users.find({}, function(error,users) {
         if (error) throw error;
-        callback(users);
+        if (!users) {
+            console.log('false');
+            callback(false);
+        }
+        else{
+            console.log('true');
+            callback(users);
+            }
     });
 };
 
 //Retrieve one user
+//Inp:name, callback
+//Out: return user if success, false if doesn't
 module.exports.retrieve = function(name, callback) {
     
     db.users.findOne({name:name}, function(error,user) {
@@ -259,6 +278,8 @@ module.exports.retrieve = function(name, callback) {
 };
 
 //Retrieve one user
+//Inp:name, callback
+//Out: user email if success, false if doesn't
 module.exports.retrieveEmail = function(name, callback) {
     
     db.users.findOne({name:name}, function(error,user) {
@@ -274,6 +295,8 @@ module.exports.retrieveEmail = function(name, callback) {
 };
 
 //count number of user in the database
+//Inp:callback
+//Out: a number
 module.exports.count=function(callback){
   db.users.count(function(error,count){
         if (error) throw error;
@@ -282,14 +305,18 @@ module.exports.count=function(callback){
 };
 
 // Delete all users
+//Inp: callback
+//Out: true
 module.exports.deleteAll = function(callback) {
     db.users.remove({}, function(error) {
         if (error) throw error;
-        callback();
+        callback(true);
     });
 };
 
 //Delete one user
+//Inp:name, callback
+//Out: true if success, false if doesn't
 module.exports.delete = function(name, callback) {
     
      db.users.findOne({name:name}, function(error, user) {
@@ -311,6 +338,8 @@ module.exports.delete = function(name, callback) {
 
 
 // Close the connection
+//Inp:callback
+//Out:none
 module.exports.close = function(callback) {
     db.close(function(error) {
         if (error) throw error;
