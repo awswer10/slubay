@@ -52,7 +52,7 @@ exports['make an account (failure)'] = function(test) {
 
 // Log in (success)
 exports['log in (success)'] = function(test) {
-    test.expect(2);
+    test.expect(1);
     
     browser.visit('http://localhost:8080/', function() {
         test.ok(browser.query('#register'));
@@ -61,40 +61,37 @@ exports['log in (success)'] = function(test) {
             fill('#login_name', 'username').
             fill('#login_password', 'password').
             pressButton('#login_submit', function() {
-                test.ok(browser.query('#logout'));
-                browser.clickLink('#logout', function() {
-                    test.done();
-                });
+                test.done();
             });
     });
 }
 
 // Create new post (success)
-//exports['create new post1 (success)'] = function(test) {
-//    test.expect(2);
-//    
-//    browser.visit('http://localhost:8080/home', function() {
-//        console.log('made it here');
-//        test.ok(browser.query('#createnewpost'));
-//        console.log('made it here1');
-//        browser.pressButton('#createnewpost', function() {
-//            console.log('made it here2');
-//            browser.
-//            fill('#title', 'title').
-//            select('#category','books').
-//            fill('#description', 'description').
-//            pressButton('#submitnewpost', function() {
-//                console.log('made it here3');
-//                test.ok(browser.query('#logout'));
-//                browser.clickLink('#logout', function() {
-//                    console.log('made it here4');
-//                    test.done();
-//                });
-//            });
-//        });
-//        
-//    });
-//}
+exports['create new post1 (success)'] = function(test) {
+    test.expect(2);
+    
+    browser.visit('http://localhost:8080/home', function() {
+        console.log('made it here');
+        test.ok(browser.query('#createnewpost'));
+        console.log('made it here1');
+        browser.pressButton('#createnewpost', function() {
+            console.log('made it here2');
+            browser.
+            fill('#title', 'title').
+            fill('#category','Skateboards').
+            fill('#description', 'description').
+            pressButton('#submitnewpost', function() {
+                console.log('made it here3');
+                test.ok(browser.query('#logout'));
+                browser.clickLink('#logout', function() {
+                    console.log('made it here4');
+                    test.done();
+                });
+            });
+        });
+        
+    });
+}
 
 // Create new post (success)
 //exports['create new post (success)'] = function(test) {

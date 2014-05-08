@@ -19,7 +19,7 @@ module.exports = function(request,response) {
     // returns error if username is unavailable.
     else {
 	    //check to see if there is any user already in the database
-	    users.retrieveAll(function(listusers){
+	    users.count(function(count){
 		
 		users.create(name, realname, password, email, function(success) {
     
@@ -28,6 +28,13 @@ module.exports = function(request,response) {
 			request.session.realname = realname;
 			request.session.password = password;
 			request.session.email = email;
+			
+			//if there is no users in the database before create,
+			//then the 1st user created is admin
+			console.log(count);
+			if (count===0) {
+			    users.makeAdmin(name, function(){});
+			}
 			response.redirect('/home');
 		    }
 	    
@@ -38,12 +45,7 @@ module.exports = function(request,response) {
 	    
 		});
 		
-		//if there is no users in the database before create,
-		//then the 1st user created is admin
-		if (!listusers) {
-		    console.log("1st user");
-		    users.makeAdmin(name, function(user){});
-		}
+
 	    });
 	}
 };

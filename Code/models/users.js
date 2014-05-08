@@ -249,7 +249,14 @@ module.exports.retrieveAll = function(callback) {
     
     db.users.find({}, function(error,users) {
         if (error) throw error;
-        callback(users);
+        if (!users) {
+            console.log('false');
+            callback(false);
+        }
+        else{
+            console.log('true');
+            callback(users);
+            }
     });
 };
 
