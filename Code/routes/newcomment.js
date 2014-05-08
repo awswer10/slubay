@@ -7,7 +7,6 @@ var validator = require('validator');
 
 module.exports = function(request,response) {
     var comment = validator.escape(request.body.comment);
-    console.log(comment);
     var dateObj = new Date();
     var month = dateObj.getUTCMonth();
     var day = dateObj.getUTCDate();
