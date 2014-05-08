@@ -188,6 +188,8 @@ module.exports.retrieveTitle = function(title, callback) {
 };
 
 //see if title has already exist
+//Inp: tilte, callback
+//Out: boolean
 module.exports.titleExist = function(title, callback) {
     db.posts.findOne({title:title}, function(error,post) {
         if (error) throw error;
@@ -203,6 +205,8 @@ module.exports.titleExist = function(title, callback) {
 
 
 //Retrieve all posts of one user
+//Inp:user, callback
+//Out:list of posts if it does exist, false if doesn't
 module.exports.retrieveUser = function(user, callback) {
     db.posts.find({user:user}).sort({date:-1}, function(error,posts) {
         if (error) throw error;
@@ -218,6 +222,8 @@ module.exports.retrieveUser = function(user, callback) {
 
 
 //count number of post in the database
+//Inp:callback
+//Out:a number
 module.exports.count=function(callback){
   db.posts.count(function(error,count){
         if (error) throw error;
@@ -226,6 +232,8 @@ module.exports.count=function(callback){
 };
 
 //count number of post in one category
+//Inp: categoryname, callback
+//Out: a number
 module.exports.countCategory=function(categoryname,callback){
   db.posts.find({category:categoryname}).count(function(error,count){
         if (error) throw error;
@@ -234,6 +242,8 @@ module.exports.countCategory=function(categoryname,callback){
 };
 
 //delete a post
+//Inp:post id, comment
+//Out: true
 module.exports.delete=function(itemid,callback){
      db.posts.remove({_id:mongojs.ObjectId(itemid)}, function(error) {
         if (error) throw error;
@@ -267,6 +277,8 @@ module.exports.deleteAll = function(callback) {
 };
 
 // Close the connection
+//Inp:number
+//Out:none
 module.exports.close = function(callback) {
     db.close(function(error) {
         if (error) throw error;

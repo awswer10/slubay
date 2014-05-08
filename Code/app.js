@@ -35,5 +35,5 @@ app.get('/home/:id/:id', require('./routes/post'));
 app.get('/home/:id', require('./routes/category'));
 app.get('*', require('./routes/default'));
 
-app.listen(8080);
+app.listen(8081);
 console.log('Server is up.');
